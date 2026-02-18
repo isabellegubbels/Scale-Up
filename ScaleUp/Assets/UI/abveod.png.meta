@@ -1,0 +1,754 @@
+fileFormatVersion: 2
+guid: f90535bfb8d0a4411916e1d6d6208202
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 809573190724588159
+    second: abveod_0
+  - first:
+      213: -4140389309801082223
+    second: abveod_1
+  - first:
+      213: -8022733423800547795
+    second: abveod_2
+  - first:
+      213: -1016692370246762255
+    second: abveod_3
+  - first:
+      213: -5890751044600123296
+    second: abveod_4
+  - first:
+      213: -4006006648014680937
+    second: abveod_5
+  - first:
+      213: -5011719546140169097
+    second: abveod_6
+  - first:
+      213: 2755268316737499648
+    second: abveod_7
+  - first:
+      213: -766850052763228266
+    second: abveod_8
+  - first:
+      213: -2371333902426761780
+    second: abveod_9
+  - first:
+      213: 7226658755287046711
+    second: abveod_10
+  - first:
+      213: -1262363486669859770
+    second: abveod_11
+  - first:
+      213: 7103662030687868143
+    second: abveod_12
+  - first:
+      213: -338176890271167922
+    second: abveod_13
+  - first:
+      213: 5881377105412773844
+    second: abveod_14
+  - first:
+      213: 3080966120705462389
+    second: abveod_15
+  - first:
+      213: -1339398087899849368
+    second: abveod_16
+  - first:
+      213: -8049134854430942586
+    second: abveod_17
+  - first:
+      213: -8018609652475037158
+    second: abveod_18
+  - first:
+      213: -6794224971628907015
+    second: abveod_19
+  - first:
+      213: -7386630210707741505
+    second: abveod_20
+  - first:
+      213: 6899206561266326661
+    second: abveod_21
+  - first:
+      213: 6868162645778577178
+    second: abveod_22
+  - first:
+      213: -5703775453536408963
+    second: abveod_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: abveod_0
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 521
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7291d4178e2c3b00800000000000000
+      internalID: 809573190724588159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abveod_1
+      rect:
+        serializedVersion: 2
+        x: 1498
+        y: 467
+        width: 62
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1925b750cd16a86c0800000000000000
+      internalID: -4140389309801082223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abveod_2
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 489
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2607b2157689a090800000000000000
+      internalID: -8022733423800547795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abveod_3
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 459
+        width: 63
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f087990dabf3e1f0800000000000000
+      internalID: -1016692370246762255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abveod_4
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 421
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 060395ea229df3ea0800000000000000
+      internalID: -5890751044600123296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abveod_5
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 165
+        width: 285
+        height: 301
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79c4b39ad2ec768c0800000000000000
+      internalID: -4006006648014680937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abveod_6
+      rect:
+        serializedVersion: 2
+        x: 487
+        y: 168
+        width: 214
+        height: 299
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77cee6240abc27ab0800000000000000
+      internalID: -5011719546140169097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abveod_7
+      rect:
+        serializedVersion: 2
+        x: 753
+        y: 162
+        width: 242
+        height: 299
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 002f600afedac3620800000000000000
+      internalID: 2755268316737499648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abveod_8
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 154
+        width: 256
+        height: 329
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 697ee01a0f99b55f0800000000000000
+      internalID: -766850052763228266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abveod_9
+      rect:
+        serializedVersion: 2
+        x: 1322
+        y: 163
+        width: 237
+        height: 301
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc5130e2164571fd0800000000000000
+      internalID: -2371333902426761780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abveod_10
+      rect:
+        serializedVersion: 2
+        x: 1609
+        y: 163
+        width: 239
+        height: 298
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73ad9d579df3a4460800000000000000
+      internalID: 7226658755287046711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abveod_11
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 409
+        width: 55
+        height: 45
+      alignment: 9
+      pivot: {x: 0.46655273, y: 0.45912}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6449e9fd81f2b7ee0800000000000000
+      internalID: -1262363486669859770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abveod_12
+      rect:
+        serializedVersion: 2
+        x: 1852
+        y: 362
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe49497eaf6459260800000000000000
+      internalID: 7103662030687868143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abveod_13
+      rect:
+        serializedVersion: 2
+        x: 1907
+        y: 362
+        width: 19
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4a0428f8ed8e4bf0800000000000000
+      internalID: -338176890271167922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abveod_14
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 341
+        width: 31
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d75e360159de9150800000000000000
+      internalID: 5881377105412773844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abveod_15
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 51
+        width: 49
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57099a5fc5ac1ca20800000000000000
+      internalID: 3080966120705462389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abveod_16
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 292
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86d54e51980896de0800000000000000
+      internalID: -1339398087899849368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abveod_17
+      rect:
+        serializedVersion: 2
+        x: 1859
+        y: 285
+        width: 54
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68a9d6cfe7abb4090800000000000000
+      internalID: -8049134854430942586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abveod_18
+      rect:
+        serializedVersion: 2
+        x: 452
+        y: 241
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1af4b7610d28b090800000000000000
+      internalID: -8018609652475037158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abveod_19
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 115
+        width: 31
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f578f9b26016b1a0800000000000000
+      internalID: -6794224971628907015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abveod_20
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 128
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb4a89b95fa6d7990800000000000000
+      internalID: -7386630210707741505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abveod_21
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 133
+        width: 31
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58cd25c50d7eebf50800000000000000
+      internalID: 6899206561266326661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abveod_22
+      rect:
+        serializedVersion: 2
+        x: 929
+        y: 126
+        width: 46
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a173d39898d905f50800000000000000
+      internalID: 6868162645778577178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abveod_23
+      rect:
+        serializedVersion: 2
+        x: 1574
+        y: 144
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7aae55e17e18d0b0800000000000000
+      internalID: -5703775453536408963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 146df7dc70e9949398733dfadef4c125
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      abveod_0: 809573190724588159
+      abveod_1: -4140389309801082223
+      abveod_10: 7226658755287046711
+      abveod_11: -1262363486669859770
+      abveod_12: 7103662030687868143
+      abveod_13: -338176890271167922
+      abveod_14: 5881377105412773844
+      abveod_15: 3080966120705462389
+      abveod_16: -1339398087899849368
+      abveod_17: -8049134854430942586
+      abveod_18: -8018609652475037158
+      abveod_19: -6794224971628907015
+      abveod_2: -8022733423800547795
+      abveod_20: -7386630210707741505
+      abveod_21: 6899206561266326661
+      abveod_22: 6868162645778577178
+      abveod_23: -5703775453536408963
+      abveod_3: -1016692370246762255
+      abveod_4: -5890751044600123296
+      abveod_5: -4006006648014680937
+      abveod_6: -5011719546140169097
+      abveod_7: 2755268316737499648
+      abveod_8: -766850052763228266
+      abveod_9: -2371333902426761780
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

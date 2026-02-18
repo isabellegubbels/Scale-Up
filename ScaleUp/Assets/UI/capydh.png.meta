@@ -1,0 +1,728 @@
+fileFormatVersion: 2
+guid: b70c47aae939d4e1d92e200e67ed545c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7079954802275125017
+    second: capydh_0
+  - first:
+      213: -8605710587836515429
+    second: capydh_1
+  - first:
+      213: -3341963838988259610
+    second: capydh_2
+  - first:
+      213: 390374452852531099
+    second: capydh_3
+  - first:
+      213: 5660099611407529075
+    second: capydh_4
+  - first:
+      213: 889378961685962398
+    second: capydh_5
+  - first:
+      213: -131485508563636044
+    second: capydh_6
+  - first:
+      213: -6624560716125499195
+    second: capydh_7
+  - first:
+      213: -9063858336101770678
+    second: capydh_8
+  - first:
+      213: 4150686973267722428
+    second: capydh_9
+  - first:
+      213: 1262170909649458563
+    second: capydh_10
+  - first:
+      213: -4840658041695595231
+    second: capydh_11
+  - first:
+      213: 9186659505100021212
+    second: capydh_12
+  - first:
+      213: 5530296425527721253
+    second: capydh_13
+  - first:
+      213: -2566403304321872306
+    second: capydh_14
+  - first:
+      213: -8112817032844338466
+    second: capydh_15
+  - first:
+      213: -8219911334332958994
+    second: capydh_16
+  - first:
+      213: 3150137508215488233
+    second: capydh_17
+  - first:
+      213: 8604371950261647235
+    second: capydh_18
+  - first:
+      213: -9015238660124588245
+    second: capydh_19
+  - first:
+      213: -1241702412211922364
+    second: capydh_20
+  - first:
+      213: 5907326183005726655
+    second: capydh_21
+  - first:
+      213: -910501917050076648
+    second: capydh_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: capydh_0
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 521
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e8f1985e92febd90800000000000000
+      internalID: -7079954802275125017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: capydh_1
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 489
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9bbf2cb0df529880800000000000000
+      internalID: -8605710587836515429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: capydh_2
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 459
+        width: 63
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ee67ec4895fe91d0800000000000000
+      internalID: -3341963838988259610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: capydh_3
+      rect:
+        serializedVersion: 2
+        x: 755
+        y: 126
+        width: 221
+        height: 376
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9f99af1f73ea6500800000000000000
+      internalID: 390374452852531099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: capydh_4
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 149
+        width: 217
+        height: 346
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 374b54bab96bc8e40800000000000000
+      internalID: 5660099611407529075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: capydh_5
+      rect:
+        serializedVersion: 2
+        x: 1495
+        y: 455
+        width: 63
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9e5ff91475b75c00800000000000000
+      internalID: 889378961685962398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: capydh_6
+      rect:
+        serializedVersion: 2
+        x: 1565
+        y: 164
+        width: 226
+        height: 335
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b0f3f860aedc2ef0800000000000000
+      internalID: -131485508563636044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: capydh_7
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 421
+        width: 34
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c0155a8025d014a0800000000000000
+      internalID: -6624560716125499195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: capydh_8
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 154
+        width: 241
+        height: 322
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4ad03e9dd4b63280800000000000000
+      internalID: -9063858336101770678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: capydh_9
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 161
+        width: 267
+        height: 297
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb0c6779fc33a9930800000000000000
+      internalID: 4150686973267722428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: capydh_10
+      rect:
+        serializedVersion: 2
+        x: 1277
+        y: 160
+        width: 237
+        height: 299
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 385dc7b41c1248110800000000000000
+      internalID: 1262170909649458563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: capydh_11
+      rect:
+        serializedVersion: 2
+        x: 1817
+        y: 437
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1259891782782dcb0800000000000000
+      internalID: -4840658041695595231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: capydh_12
+      rect:
+        serializedVersion: 2
+        x: 1852
+        y: 362
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cddd3f995229d7f70800000000000000
+      internalID: 9186659505100021212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: capydh_13
+      rect:
+        serializedVersion: 2
+        x: 1907
+        y: 362
+        width: 20
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52d313a5c4f8fbc40800000000000000
+      internalID: 5530296425527721253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: capydh_14
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 328
+        width: 31
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4e8187cacd426cd0800000000000000
+      internalID: -2566403304321872306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: capydh_15
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 262
+        width: 55
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eda139564eb796f80800000000000000
+      internalID: -8112817032844338466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: capydh_16
+      rect:
+        serializedVersion: 2
+        x: 1191
+        y: 182
+        width: 39
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee670ef31320ded80800000000000000
+      internalID: -8219911334332958994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: capydh_17
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 175
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ee71d2af5987bb20800000000000000
+      internalID: 3150137508215488233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: capydh_18
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 114
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3873eaa63bed86770800000000000000
+      internalID: 8604371950261647235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: capydh_19
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 109
+        width: 20
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b27c7e1143073e280800000000000000
+      internalID: -9015238660124588245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: capydh_20
+      rect:
+        serializedVersion: 2
+        x: 929
+        y: 126
+        width: 46
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44adc532c3694cee0800000000000000
+      internalID: -1241702412211922364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: capydh_21
+      rect:
+        serializedVersion: 2
+        x: 542
+        y: 94
+        width: 32
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb7ab667dd90bf150800000000000000
+      internalID: 5907326183005726655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: capydh_22
+      rect:
+        serializedVersion: 2
+        x: 1521
+        y: 98
+        width: 19
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8120bea945f3d53f0800000000000000
+      internalID: -910501917050076648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: c45fcba14fbf2477386e9b7b9f718c5b
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      capydh_0: -7079954802275125017
+      capydh_1: -8605710587836515429
+      capydh_10: 1262170909649458563
+      capydh_11: -4840658041695595231
+      capydh_12: 9186659505100021212
+      capydh_13: 5530296425527721253
+      capydh_14: -2566403304321872306
+      capydh_15: -8112817032844338466
+      capydh_16: -8219911334332958994
+      capydh_17: 3150137508215488233
+      capydh_18: 8604371950261647235
+      capydh_19: -9015238660124588245
+      capydh_2: -3341963838988259610
+      capydh_20: -1241702412211922364
+      capydh_21: 5907326183005726655
+      capydh_22: -910501917050076648
+      capydh_3: 390374452852531099
+      capydh_4: 5660099611407529075
+      capydh_5: 889378961685962398
+      capydh_6: -131485508563636044
+      capydh_7: -6624560716125499195
+      capydh_8: -9063858336101770678
+      capydh_9: 4150686973267722428
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,728 @@
+fileFormatVersion: 2
+guid: f1a44dfedb9454f58ad4d4eb1261cb1e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 528879543952282602
+    second: water-type-font-liquid-letters-set_0
+  - first:
+      213: -872805908683043326
+    second: water-type-font-liquid-letters-set_1
+  - first:
+      213: 5070004664063069176
+    second: water-type-font-liquid-letters-set_2
+  - first:
+      213: 24756785524689211
+    second: water-type-font-liquid-letters-set_3
+  - first:
+      213: 8185551529043635928
+    second: water-type-font-liquid-letters-set_4
+  - first:
+      213: -8195068100749515745
+    second: water-type-font-liquid-letters-set_5
+  - first:
+      213: -4825591610002859016
+    second: water-type-font-liquid-letters-set_6
+  - first:
+      213: -3224871098312577379
+    second: water-type-font-liquid-letters-set_7
+  - first:
+      213: 7254422598024408201
+    second: water-type-font-liquid-letters-set_8
+  - first:
+      213: 5314865025888691964
+    second: water-type-font-liquid-letters-set_9
+  - first:
+      213: 8091699612649420457
+    second: water-type-font-liquid-letters-set_10
+  - first:
+      213: 3068130454547302066
+    second: water-type-font-liquid-letters-set_11
+  - first:
+      213: -5457796261733373382
+    second: water-type-font-liquid-letters-set_12
+  - first:
+      213: 4385827912409027411
+    second: water-type-font-liquid-letters-set_13
+  - first:
+      213: -2071615680446983191
+    second: water-type-font-liquid-letters-set_14
+  - first:
+      213: -5614878143950494899
+    second: water-type-font-liquid-letters-set_15
+  - first:
+      213: -4069925462588863955
+    second: water-type-font-liquid-letters-set_16
+  - first:
+      213: -8150421603244101412
+    second: water-type-font-liquid-letters-set_17
+  - first:
+      213: -4784010628574779649
+    second: water-type-font-liquid-letters-set_18
+  - first:
+      213: 6991230134249304142
+    second: water-type-font-liquid-letters-set_19
+  - first:
+      213: 6862284091500655685
+    second: water-type-font-liquid-letters-set_20
+  - first:
+      213: -3987309257402410398
+    second: water-type-font-liquid-letters-set_21
+  - first:
+      213: -7789189552336314893
+    second: water-type-font-liquid-letters-set_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: water-type-font-liquid-letters-set_0
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 488
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae31f32a425f65700800000000000000
+      internalID: 528879543952282602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-type-font-liquid-letters-set_1
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 489
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20ec51f76ab23e3f0800000000000000
+      internalID: -872805908683043326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-type-font-liquid-letters-set_2
+      rect:
+        serializedVersion: 2
+        x: 761
+        y: 152
+        width: 205
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fb8d0341664c5640800000000000000
+      internalID: 5070004664063069176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-type-font-liquid-letters-set_3
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 134
+        width: 244
+        height: 342
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b39cafe4a24f75000800000000000000
+      internalID: 24756785524689211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-type-font-liquid-letters-set_4
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 132
+        width: 106
+        height: 302
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8de2d4b2fbbe89170800000000000000
+      internalID: 8185551529043635928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-type-font-liquid-letters-set_5
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 135
+        width: 226
+        height: 346
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f14a0b05bf4454e80800000000000000
+      internalID: -8195068100749515745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-type-font-liquid-letters-set_6
+      rect:
+        serializedVersion: 2
+        x: 1306
+        y: 138
+        width: 226
+        height: 331
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fb9cae6ffd080db0800000000000000
+      internalID: -4825591610002859016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-type-font-liquid-letters-set_7
+      rect:
+        serializedVersion: 2
+        x: 1559
+        y: 141
+        width: 224
+        height: 347
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9ea7aa72d4fe33d0800000000000000
+      internalID: -3224871098312577379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-type-font-liquid-letters-set_8
+      rect:
+        serializedVersion: 2
+        x: 1817
+        y: 437
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98cafc5dae2eca460800000000000000
+      internalID: 7254422598024408201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-type-font-liquid-letters-set_9
+      rect:
+        serializedVersion: 2
+        x: 677
+        y: 393
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf62e39e49132c940800000000000000
+      internalID: 5314865025888691964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-type-font-liquid-letters-set_10
+      rect:
+        serializedVersion: 2
+        x: 1852
+        y: 362
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a672211ded7b4070800000000000000
+      internalID: 8091699612649420457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-type-font-liquid-letters-set_11
+      rect:
+        serializedVersion: 2
+        x: 1907
+        y: 362
+        width: 19
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b689db8460349a20800000000000000
+      internalID: 3068130454547302066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-type-font-liquid-letters-set_12
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 327
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3a6de277330244b0800000000000000
+      internalID: -5457796261733373382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-type-font-liquid-letters-set_13
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 310
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 353122dcf379ddc30800000000000000
+      internalID: 4385827912409027411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-type-font-liquid-letters-set_14
+      rect:
+        serializedVersion: 2
+        x: 670
+        y: 308
+        width: 63
+        height: 51
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e314d7b3842043e0800000000000000
+      internalID: -2071615680446983191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-type-font-liquid-letters-set_15
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 262
+        width: 56
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d43e9b4b312f312b0800000000000000
+      internalID: -5614878143950494899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-type-font-liquid-letters-set_16
+      rect:
+        serializedVersion: 2
+        x: 1531
+        y: 210
+        width: 63
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2ac21cea58b487c0800000000000000
+      internalID: -4069925462588863955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-type-font-liquid-letters-set_17
+      rect:
+        serializedVersion: 2
+        x: 1256
+        y: 199
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd037f01cb2e3ee80800000000000000
+      internalID: -8150421603244101412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-type-font-liquid-letters-set_18
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 175
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff66b1a1ea7cb9db0800000000000000
+      internalID: -4784010628574779649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-type-font-liquid-letters-set_19
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 114
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e40bfe614c6d50160800000000000000
+      internalID: 6991230134249304142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-type-font-liquid-letters-set_20
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 105
+        width: 31
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 544f5b5f50bbb3f50800000000000000
+      internalID: 6862284091500655685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-type-font-liquid-letters-set_21
+      rect:
+        serializedVersion: 2
+        x: 1251
+        y: 132
+        width: 39
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26a17e62b5b3aa8c0800000000000000
+      internalID: -3987309257402410398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-type-font-liquid-letters-set_22
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 109
+        width: 20
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fd5fccfe5d37e390800000000000000
+      internalID: -7789189552336314893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 9ddbb488d6f2a4ad29cae4f5a30d015d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      water-type-font-liquid-letters-set_0: 528879543952282602
+      water-type-font-liquid-letters-set_1: -872805908683043326
+      water-type-font-liquid-letters-set_10: 8091699612649420457
+      water-type-font-liquid-letters-set_11: 3068130454547302066
+      water-type-font-liquid-letters-set_12: -5457796261733373382
+      water-type-font-liquid-letters-set_13: 4385827912409027411
+      water-type-font-liquid-letters-set_14: -2071615680446983191
+      water-type-font-liquid-letters-set_15: -5614878143950494899
+      water-type-font-liquid-letters-set_16: -4069925462588863955
+      water-type-font-liquid-letters-set_17: -8150421603244101412
+      water-type-font-liquid-letters-set_18: -4784010628574779649
+      water-type-font-liquid-letters-set_19: 6991230134249304142
+      water-type-font-liquid-letters-set_2: 5070004664063069176
+      water-type-font-liquid-letters-set_20: 6862284091500655685
+      water-type-font-liquid-letters-set_21: -3987309257402410398
+      water-type-font-liquid-letters-set_22: -7789189552336314893
+      water-type-font-liquid-letters-set_3: 24756785524689211
+      water-type-font-liquid-letters-set_4: 8185551529043635928
+      water-type-font-liquid-letters-set_5: -8195068100749515745
+      water-type-font-liquid-letters-set_6: -4825591610002859016
+      water-type-font-liquid-letters-set_7: -3224871098312577379
+      water-type-font-liquid-letters-set_8: 7254422598024408201
+      water-type-font-liquid-letters-set_9: 5314865025888691964
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
