@@ -17,6 +17,7 @@ public class MainMenuUI : MonoBehaviour
     public void PlayGame()
     {
         PlayButtonSfx();
+        if (GameManager.instance) GameManager.instance.LoadGame();
         SceneManager.LoadScene("MainScene");
     }
 
