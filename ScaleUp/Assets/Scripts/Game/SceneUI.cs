@@ -1,10 +1,10 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class SceneUI : MonoBehaviour
 {
-    [SerializeField] Text daysOpenText, fishAcclimationText;
+    [SerializeField] TMP_Text daysOpenText, fishAcclimationText, moneyText, fishText, fishFoodText;
 
     void Start() => RefreshAll();
 
@@ -14,6 +14,9 @@ public class SceneUI : MonoBehaviour
     {
         if (!GameManager.instance) return;
         UpdateDaysOpen();
+        UpdateMoney();
+        UpdateFish();
+        UpdateFishFood();
         UpdateFishAcclimation();
     }
 
@@ -21,6 +24,9 @@ public class SceneUI : MonoBehaviour
     {
         if (!GameManager.instance) return;
         UpdateDaysOpen();
+        UpdateMoney();
+        UpdateFish();
+        UpdateFishFood();
         UpdateFishAcclimation();
     }
 
@@ -28,6 +34,24 @@ public class SceneUI : MonoBehaviour
     {
         if (!daysOpenText || !GameManager.instance) return;
         daysOpenText.text = $"Days Open: {GameManager.instance.daysOpen}";
+    }
+
+    void UpdateMoney()
+    {
+        if (!moneyText || !GameManager.instance) return;
+        moneyText.text = $"${GameManager.instance.moneyAmount}";
+    }
+
+    void UpdateFish()
+    {
+        if (!fishText || !GameManager.instance) return;
+        fishText.text = GameManager.instance.fishAmount.ToString();
+    }
+
+    void UpdateFishFood()
+    {
+        if (!fishFoodText || !GameManager.instance) return;
+        fishFoodText.text = GameManager.instance.fishFood.ToString();
     }
 
     void UpdateFishAcclimation()

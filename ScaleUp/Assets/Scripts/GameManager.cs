@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public int moneyAmount, fishAmount, storeRating, daysOpen;
+    public int moneyAmount, fishAmount, fishFood, storeRating, daysOpen;
     public float timePlayed;
 
     public bool fishAcclimationActive;
@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     const string moneyKey = "GM_Money";
     const string fishKey = "GM_Fish";
+    const string fishFoodKey = "GM_FishFood";
     const string ratingKey = "GM_Rating";
     const string timeKey = "GM_Time";
     const string daysOpenKey = "GM_DaysOpen";
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(gameObject);
+        LoadGame();
     }
 
     void Update()
@@ -67,11 +69,12 @@ public class GameManager : MonoBehaviour
 
     public void NewGame()
     {
-        moneyAmount = 0;
-        fishAmount = 0;
+        moneyAmount = 200;
+        fishAmount = 5;
+        fishFood = 5;
         storeRating = 0;
         timePlayed = 0f;
-        daysOpen = 0;
+        daysOpen = 1;
 
         fishAcclimationActive = false;
         fishAcclimationEndTicks = 0;
@@ -85,6 +88,7 @@ public class GameManager : MonoBehaviour
 
         PlayerPrefs.SetInt(moneyKey, moneyAmount);
         PlayerPrefs.SetInt(fishKey, fishAmount);
+        PlayerPrefs.SetInt(fishFoodKey, fishFood);
         PlayerPrefs.SetInt(ratingKey, storeRating);
         PlayerPrefs.SetFloat(timeKey, timePlayed);
         PlayerPrefs.SetInt(daysOpenKey, daysOpen);
@@ -107,9 +111,11 @@ public class GameManager : MonoBehaviour
 
         moneyAmount = PlayerPrefs.GetInt(moneyKey, 0);
         fishAmount = PlayerPrefs.GetInt(fishKey, 0);
+        fishFood = PlayerPrefs.GetInt(fishFoodKey, 0);
         storeRating = PlayerPrefs.GetInt(ratingKey, 0);
         timePlayed = PlayerPrefs.GetFloat(timeKey, 0f);
         daysOpen = PlayerPrefs.GetInt(daysOpenKey, 0);
+        if (daysOpen <= 0) daysOpen = 1;
 
         string lastTicksString = PlayerPrefs.GetString(lastRealKey, "0");
         if (!long.TryParse(lastTicksString, out lastRealTimeTicks)) lastRealTimeTicks = DateTime.UtcNow.Ticks;
@@ -121,6 +127,43 @@ public class GameManager : MonoBehaviour
         if (!long.TryParse(fishTicksString, out fishAcclimationEndTicks)) fishAcclimationEndTicks = 0;
 
         RefreshRealTimeProgress();
+    }
+
+    public void AddMoney(int amount)
+    {
+        if (amount <= 0) return;
+        moneyAmount += amount;
+        SaveGame();
+    }
+
+    public bool SpendMoney(int amount)
+    {
+        if (amount <= 0) return true;
+        if (moneyAmount < amount)
+        {
+            Debug.Log("purchase failed, REMINDER: implement user feedback for failed purchases");
+            return false;
+        }
+        moneyAmount -= amount;
+        SaveGame();
+        Debug.Log("purchase succeeded, REMINDER: implement user feedback for successfull purchases");
+        return true;
+    }
+
+    public void AddFishFood(int amount)
+    {
+        if (amount <= 0) return;
+        fishFood += amount;
+        SaveGame();
+    }
+
+    public bool UseFishFood(int amount)
+    {
+        if (amount <= 0) return true;
+        if (fishFood < amount) return false;
+        fishFood -= amount;
+        SaveGame();
+        return true;
     }
 
     public void StartFishAcclimationHours(float hours)
