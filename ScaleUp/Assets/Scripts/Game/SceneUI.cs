@@ -45,13 +45,15 @@ public class SceneUI : MonoBehaviour
     void UpdateFish()
     {
         if (!fishText || !GameManager.instance) return;
-        fishText.text = GameManager.instance.fishAmount.ToString();
+        int count = TankManager.instance != null ? TankManager.instance.GetTotalFishCount() : GameManager.instance.fishAmount;
+        fishText.text = count.ToString();
     }
 
     void UpdateFishFood()
     {
         if (!fishFoodText || !GameManager.instance) return;
-        fishFoodText.text = GameManager.instance.fishFood.ToString();
+        int food = FishResourceManager.instance != null ? FishResourceManager.instance.GetFishFood() : GameManager.instance.fishFood;
+        fishFoodText.text = food.ToString();
     }
 
     void UpdateFishAcclimation()

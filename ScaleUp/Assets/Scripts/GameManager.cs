@@ -20,10 +20,15 @@ public class GameManager : MonoBehaviour
     const string lastRealKey = "GM_LastRealTicks";
     const string fishAcclActiveKey = "GM_FishAcclActive";
     const string fishAcclEndKey = "GM_FishAcclEndTicks";
+    const string tankSlotKeyPrefix = "GM_Tank_";
 
     const double realSecondsPerGameDay = 12 * 60 * 60; // 12 real hours per in-game day
 
     long lastRealTimeTicks;
+    TankSlotData[] loadedTankSlots;
+
+    [Tooltip("Species id for the 5 fish in the first tank on New Game (e.g. \"100\" for Snail)")]
+    [SerializeField] string defaultNewGameSpeciesId = "100";
 
     void Awake()
     {
@@ -59,7 +64,11 @@ public class GameManager : MonoBehaviour
         if (deltaSeconds > 0d)
         {
             int additionalDays = Mathf.FloorToInt((float)(deltaSeconds / realSecondsPerGameDay));
-            if (additionalDays > 0) daysOpen += additionalDays;
+            if (additionalDays > 0)
+            {
+                daysOpen += additionalDays;
+                if (TankManager.instance != null) TankManager.instance.ResetFedTodayForNewDay();
+            }
         }
 
         lastRealTimeTicks = now.Ticks;
@@ -80,15 +89,46 @@ public class GameManager : MonoBehaviour
         fishAcclimationEndTicks = 0;
 
         lastRealTimeTicks = DateTime.UtcNow.Ticks;
+        loadedTankSlots = GetDefaultTankSlots();
+    }
+
+    TankSlotData[] GetDefaultTankSlots()
+    {
+        var arr = new TankSlotData[TankTier.SlotCount];
+        for (int i = 0; i < arr.Length; i++)
+        {
+            arr[i] = new TankSlotData
+            {
+                isOwned = i == 0,
+                lastMaintainedDay = 1,
+                speciesId = i == 0 ? defaultNewGameSpeciesId : null,
+                fishCount = i == 0 ? 5 : 0,
+                acclimationEndTicks = 0,
+                fedToday = false
+            };
+        }
+        return arr;
     }
 
     public void SaveGame()
     {
         RefreshRealTimeProgress();
 
+        if (TankManager.instance != null)
+        {
+            loadedTankSlots = TankManager.instance.GetAllSlotsForSave();
+            fishAmount = TankManager.instance.GetTotalFishCount();
+        }
+        if (loadedTankSlots != null)
+        {
+            for (int i = 0; i < loadedTankSlots.Length && i < TankTier.SlotCount; i++)
+                PlayerPrefs.SetString(tankSlotKeyPrefix + i, JsonUtility.ToJson(loadedTankSlots[i]));
+        }
+
+        int foodToSave = FishResourceManager.instance != null ? FishResourceManager.instance.GetFishFood() : fishFood;
         PlayerPrefs.SetInt(moneyKey, moneyAmount);
         PlayerPrefs.SetInt(fishKey, fishAmount);
-        PlayerPrefs.SetInt(fishFoodKey, fishFood);
+        PlayerPrefs.SetInt(fishFoodKey, foodToSave);
         PlayerPrefs.SetInt(ratingKey, storeRating);
         PlayerPrefs.SetFloat(timeKey, timePlayed);
         PlayerPrefs.SetInt(daysOpenKey, daysOpen);
@@ -112,6 +152,7 @@ public class GameManager : MonoBehaviour
         moneyAmount = PlayerPrefs.GetInt(moneyKey, 0);
         fishAmount = PlayerPrefs.GetInt(fishKey, 0);
         fishFood = PlayerPrefs.GetInt(fishFoodKey, 0);
+        if (FishResourceManager.instance != null) FishResourceManager.instance.SetFishFood(fishFood);
         storeRating = PlayerPrefs.GetInt(ratingKey, 0);
         timePlayed = PlayerPrefs.GetFloat(timeKey, 0f);
         daysOpen = PlayerPrefs.GetInt(daysOpenKey, 0);
@@ -126,7 +167,22 @@ public class GameManager : MonoBehaviour
         string fishTicksString = PlayerPrefs.GetString(fishAcclEndKey, "0");
         if (!long.TryParse(fishTicksString, out fishAcclimationEndTicks)) fishAcclimationEndTicks = 0;
 
+        loadedTankSlots = new TankSlotData[TankTier.SlotCount];
+        var defaults = GetDefaultTankSlots();
+        for (int i = 0; i < TankTier.SlotCount; i++)
+        {
+            string json = PlayerPrefs.GetString(tankSlotKeyPrefix + i, "");
+            if (string.IsNullOrEmpty(json)) loadedTankSlots[i] = defaults[i].Clone();
+            else loadedTankSlots[i] = JsonUtility.FromJson<TankSlotData>(json);
+        }
+
         RefreshRealTimeProgress();
+    }
+
+    public void RestoreTankStateToManager()
+    {
+        if (TankManager.instance == null || loadedTankSlots == null) return;
+        TankManager.instance.InitializeSlotsFromSave(loadedTankSlots);
     }
 
     public void AddMoney(int amount)
@@ -152,13 +208,18 @@ public class GameManager : MonoBehaviour
 
     public void AddFishFood(int amount)
     {
-        if (amount <= 0) return;
-        fishFood += amount;
-        SaveGame();
+        if (FishResourceManager.instance != null) FishResourceManager.instance.AddFishFood(amount);
+        else
+        {
+            if (amount <= 0) return;
+            fishFood += amount;
+            SaveGame();
+        }
     }
 
     public bool UseFishFood(int amount)
     {
+        if (FishResourceManager.instance != null) return FishResourceManager.instance.UseFishFood(amount);
         if (amount <= 0) return true;
         if (fishFood < amount) return false;
         fishFood -= amount;
