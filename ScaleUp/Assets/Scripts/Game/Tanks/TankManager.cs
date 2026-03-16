@@ -122,6 +122,26 @@ public class TankManager : MonoBehaviour
 
     public const float AcclimationHours = 2f;
 
+    public bool CanTankAcceptFish(int slotIndex, string speciesId, int count)
+    {
+        var slot = GetSlot(slotIndex);
+        if (slot == null || !slot.isOwned || count <= 0) return false;
+        int capacity = TankTier.GetCapacity(slotIndex);
+        if (!string.IsNullOrEmpty(slot.speciesId) && slot.speciesId != speciesId) return false; // One species per tank while it has fish
+        if (slot.fishCount + count > capacity) return false;
+        return true;
+    }
+
+    public int FindAvailableOwnedTank(string speciesId, int count)
+    {
+        if (string.IsNullOrEmpty(speciesId) || count <= 0) return -1;
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (CanTankAcceptFish(i, speciesId, count)) return i;
+        }
+        return -1;
+    }
+
     public bool AddFishToTank(int slotIndex, string speciesId, int count)
     {
         var slot = GetSlot(slotIndex);

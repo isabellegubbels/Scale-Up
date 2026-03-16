@@ -15,4 +15,4 @@ MonoBehaviour:
   speciesId: 100
   displayName: Mystery Snail
   purchaseCost: 5
-  placeholderSprite: {fileID: 4226519754053376073, guid: 298147d4aebd74b3e8d9c234cd3b0547, type: 3}
+  placeholderSprite: {fileID: -6207193392188836992, guid: cb4c77c3b9f04496fa6ffd30cdec3d3d, type: 3}
