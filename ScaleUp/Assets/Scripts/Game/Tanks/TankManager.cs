@@ -176,4 +176,26 @@ public class TankManager : MonoBehaviour
         var slot = GetSlot(slotIndex);
         return slot != null && (slot.fishCount == 0 || slot.acclimationEndTicks <= 0 || System.DateTime.UtcNow.Ticks >= slot.acclimationEndTicks);
     }
+
+    /// <summary>When tank maintenance is implemented, tie this to lastMaintainedDay vs daysOpen.</summary>
+    public bool IsTankClean(int slotIndex)
+    {
+        var slot = GetSlot(slotIndex);
+        return slot != null && slot.isOwned;
+    }
+
+    public bool RemoveFishFromTank(int slotIndex, int count)
+    {
+        var slot = GetSlot(slotIndex);
+        if (slot == null || !slot.isOwned || count <= 0 || slot.fishCount < count) return false;
+        slot.fishCount -= count;
+        if (slot.fishCount <= 0)
+        {
+            slot.fishCount = 0;
+            slot.speciesId = null;
+            slot.acclimationEndTicks = 0;
+        }
+        if (GameManager.instance != null) GameManager.instance.SaveGame();
+        return true;
+    }
 }

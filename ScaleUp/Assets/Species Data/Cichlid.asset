@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13ae1d4eeb93c4c188189acfdc38faab, type: 3}
-  m_Name: Snail
+  m_Name: Cichlid
   m_EditorClassIdentifier: Assembly-CSharp::FishSpeciesData
-  speciesId: 100
-  displayName: Mystery Snail
-  purchaseCost: 5
-  placeholderSprite: {fileID: -6207193392188836992, guid: cb4c77c3b9f04496fa6ffd30cdec3d3d, type: 3}
-  startsUnlocked: 1
-  unlockAfterSales: 0
+  speciesId: 106
+  displayName: Cichlid
+  purchaseCost: 60
+  placeholderSprite: {fileID: 0}
+  startsUnlocked: 0
+  unlockAfterSales: 100

@@ -5,8 +5,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public int moneyAmount, fishAmount, fishFood, storeRating, daysOpen;
+    public int moneyAmount, fishAmount, fishFood, storeRating, daysOpen, totalFishSold;
     public float timePlayed;
+
+    public bool employeeHiredActive;
+    public long employeeContractEndUtcTicks;
 
     public bool fishAcclimationActive;
     public long fishAcclimationEndTicks;
@@ -21,6 +24,10 @@ public class GameManager : MonoBehaviour
     const string fishAcclActiveKey = "GM_FishAcclActive";
     const string fishAcclEndKey = "GM_FishAcclEndTicks";
     const string tankSlotKeyPrefix = "GM_Tank_";
+    const string decorOwnedKey = "GM_DecorOwned";
+    const string totalFishSoldKey = "GM_TotalFishSold";
+    const string employeeActiveKey = "GM_EmployeeActive";
+    const string employeeEndTicksKey = "GM_EmployeeEndTicks";
 
     const double realSecondsPerGameDay = 12 * 60 * 60; // 12 real hours per in-game day
 
@@ -88,6 +95,11 @@ public class GameManager : MonoBehaviour
         fishAcclimationActive = false;
         fishAcclimationEndTicks = 0;
 
+        totalFishSold = 0;
+        employeeHiredActive = false;
+        employeeContractEndUtcTicks = 0;
+        PlayerPrefs.SetString(decorOwnedKey, "");
+
         lastRealTimeTicks = DateTime.UtcNow.Ticks;
         loadedTankSlots = GetDefaultTankSlots();
     }
@@ -137,6 +149,11 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt(fishAcclActiveKey, fishAcclimationActive ? 1 : 0);
         PlayerPrefs.SetString(fishAcclEndKey, fishAcclimationEndTicks.ToString());
 
+        PlayerPrefs.SetString(decorOwnedKey, GetDecorOwnedCsv());
+        PlayerPrefs.SetInt(totalFishSoldKey, totalFishSold);
+        PlayerPrefs.SetInt(employeeActiveKey, employeeHiredActive ? 1 : 0);
+        PlayerPrefs.SetString(employeeEndTicksKey, employeeContractEndUtcTicks.ToString());
+
         PlayerPrefs.Save();
     }
 
@@ -167,6 +184,12 @@ public class GameManager : MonoBehaviour
         string fishTicksString = PlayerPrefs.GetString(fishAcclEndKey, "0");
         if (!long.TryParse(fishTicksString, out fishAcclimationEndTicks)) fishAcclimationEndTicks = 0;
 
+        totalFishSold = PlayerPrefs.GetInt(totalFishSoldKey, 0);
+        if (totalFishSold < 0) totalFishSold = 0;
+        employeeHiredActive = PlayerPrefs.GetInt(employeeActiveKey, 0) == 1;
+        string empEnd = PlayerPrefs.GetString(employeeEndTicksKey, "0");
+        if (!long.TryParse(empEnd, out employeeContractEndUtcTicks)) employeeContractEndUtcTicks = 0;
+
         loadedTankSlots = new TankSlotData[TankTier.SlotCount];
         var defaults = GetDefaultTankSlots();
         for (int i = 0; i < TankTier.SlotCount; i++)
@@ -189,6 +212,44 @@ public class GameManager : MonoBehaviour
     {
         if (amount <= 0) return;
         moneyAmount += amount;
+        SaveGame();
+    }
+
+    public void AddTotalFishSold(int delta)
+    {
+        if (delta <= 0) return;
+        totalFishSold += delta;
+        SaveGame();
+    }
+
+    public bool IsDecorOwned(string decorId)
+    {
+        if (string.IsNullOrEmpty(decorId)) return false;
+        string csv = PlayerPrefs.GetString(decorOwnedKey, "");
+        if (string.IsNullOrEmpty(csv)) return false;
+        string[] parts = csv.Split(',');
+        for (int i = 0; i < parts.Length; i++)
+        {
+            if (parts[i].Trim() == decorId) return true;
+        }
+        return false;
+    }
+
+    public void AddDecorOwned(string decorId)
+    {
+        if (string.IsNullOrEmpty(decorId) || IsDecorOwned(decorId)) return;
+        string csv = PlayerPrefs.GetString(decorOwnedKey, "");
+        if (string.IsNullOrEmpty(csv)) PlayerPrefs.SetString(decorOwnedKey, decorId);
+        else PlayerPrefs.SetString(decorOwnedKey, csv + "," + decorId);
+        SaveGame();
+    }
+
+    string GetDecorOwnedCsv() => PlayerPrefs.GetString(decorOwnedKey, "");
+
+    public void SetEmployeeHired(bool active, long contractEndUtcTicks)
+    {
+        employeeHiredActive = active;
+        employeeContractEndUtcTicks = contractEndUtcTicks;
         SaveGame();
     }
 

@@ -9,4 +9,9 @@ public class FishSpeciesData : ScriptableObject
     [Tooltip("Cost for the player to buy this species (e.g. from supplier). Customer offer prices will be handled elsewhere.")]
     public int purchaseCost;
     public Sprite placeholderSprite;
+
+    [Tooltip("If true, species appears in the order menu from a new game.")]
+    public bool startsUnlocked;
+    [Tooltip("Total lifetime fish sold needed to unlock (ignored if startsUnlocked).")]
+    public int unlockAfterSales;
 }
