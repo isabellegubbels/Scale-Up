@@ -15,6 +15,6 @@ MonoBehaviour:
   speciesId: 106
   displayName: Cichlid
   purchaseCost: 60
-  placeholderSprite: {fileID: 0}
+  placeholderSprite: {fileID: 4758223744141436781, guid: 2978a127cf47d4c738128e2954316cf1, type: 3}
   startsUnlocked: 0
   unlockAfterSales: 100

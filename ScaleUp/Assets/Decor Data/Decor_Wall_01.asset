@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DecorItemData
   decorId: wall_01
   displayName: Wallpaper 1
-  cost: 40
+  cost: 250
   icon: {fileID: 0}
-  bonusType: 1
+  bonusType: 2
   bonusValue: 0.05

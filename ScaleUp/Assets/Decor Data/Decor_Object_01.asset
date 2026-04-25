@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2b3c4d5e6f7488190abcdef01234567, type: 3}
-  m_Name: Decor_Store_02
+  m_Name: Decor_Object_01
   m_EditorClassIdentifier: Assembly-CSharp::DecorItemData
-  decorId: store_02
-  displayName: Store Decor 2
-  cost: 100
-  icon: {fileID: 0}
-  bonusType: 1
-  bonusValue: 0.1
+  decorId: store_01
+  displayName: Store Decor 1
+  cost: 700
+  icon: {fileID: 7997373835756698435, guid: 85e43066092804de19e01d2d0a52b1a7, type: 3}
+  bonusType: 0
+  bonusValue: 1

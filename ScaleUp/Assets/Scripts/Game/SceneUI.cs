@@ -4,11 +4,21 @@ using TMPro;
 
 public class SceneUI : MonoBehaviour
 {
-    [SerializeField] TMP_Text daysOpenText, fishAcclimationText, moneyText, fishText, fishFoodText;
+    [SerializeField] TMP_Text daysOpenText, acclimationSummaryText, moneyText, fishText, fishFoodText;
+    [SerializeField] TMP_Text[] tankAcclimationTexts;
+    [SerializeField] GameObject[] tankMaintainButtons;
 
-    void Start() => RefreshAll();
+    void Start()
+    {
+        HideAllMaintainButtons();
+        RefreshAll();
+    }
 
-    void OnEnable() => RefreshAll();
+    void OnEnable()
+    {
+        HideAllMaintainButtons();
+        RefreshAll();
+    }
 
     void Update()
     {
@@ -17,7 +27,8 @@ public class SceneUI : MonoBehaviour
         UpdateMoney();
         UpdateFish();
         UpdateFishFood();
-        UpdateFishAcclimation();
+        UpdateAcclimationTexts();
+        UpdateMaintainButtons();
     }
 
     void RefreshAll()
@@ -27,7 +38,8 @@ public class SceneUI : MonoBehaviour
         UpdateMoney();
         UpdateFish();
         UpdateFishFood();
-        UpdateFishAcclimation();
+        UpdateAcclimationTexts();
+        UpdateMaintainButtons();
     }
 
     void UpdateDaysOpen()
@@ -56,31 +68,114 @@ public class SceneUI : MonoBehaviour
         fishFoodText.text = food.ToString();
     }
 
-    void UpdateFishAcclimation()
+    void UpdateAcclimationTexts()
     {
-        if (!fishAcclimationText || !GameManager.instance) return;
+        UpdateAcclimationSummary();
+        UpdatePerTankAcclimationTexts();
+    }
 
-        if (!GameManager.instance.fishAcclimationActive)
+    void UpdateMaintainButtons()
+    {
+        if (tankMaintainButtons == null || tankMaintainButtons.Length == 0) return;
+
+        for (int i = 0; i < tankMaintainButtons.Length; i++)
         {
-            fishAcclimationText.text = "Fish Acclimation: None";
+            GameObject button = tankMaintainButtons[i];
+            if (!button) continue;
+
+            bool show = false;
+            if (TankManager.instance != null && i < TankManager.instance.SlotCount)
+            {
+                var slot = TankManager.instance.GetSlot(i);
+                show = slot != null && slot.isOwned && !TankManager.instance.IsTankClean(i);
+            }
+            button.SetActive(show);
+        }
+    }
+
+    void HideAllMaintainButtons()
+    {
+        if (tankMaintainButtons == null || tankMaintainButtons.Length == 0) return;
+        for (int i = 0; i < tankMaintainButtons.Length; i++)
+        {
+            if (tankMaintainButtons[i] != null) tankMaintainButtons[i].SetActive(false);
+        }
+    }
+
+    void UpdateAcclimationSummary()
+    {
+        if (!acclimationSummaryText || !GameManager.instance) return;
+        if (TankManager.instance == null)
+        {
+            acclimationSummaryText.text = "Fish Acclimation: None";
             return;
         }
-
-        float secondsRemaining = GameManager.instance.GetFishAcclimationSecondsRemaining();
-
-        if (secondsRemaining <= 0f)
+        int acclimatingTankCount = 0;
+        float soonestSeconds = float.MaxValue;
+        for (int i = 0; i < TankManager.instance.SlotCount; i++)
         {
-            fishAcclimationText.text = "Fish Acclimation: Complete";
+            var slot = TankManager.instance.GetSlot(i);
+            if (slot == null || !slot.isOwned || slot.fishCount <= 0) continue;
+            float remaining = TankManager.instance.GetAcclimationSecondsRemaining(i);
+            if (remaining <= 0f) continue;
+            acclimatingTankCount++;
+            if (remaining < soonestSeconds) soonestSeconds = remaining;
+        }
+        if (acclimatingTankCount == 0)
+        {
+            acclimationSummaryText.text = "Fish Acclimation: None";
             return;
         }
+        acclimationSummaryText.text = $"Fish Acclimation: {acclimatingTankCount} tank(s), next {FormatTime(soonestSeconds)}";
+    }
 
-        fishAcclimationText.text = $"Fish Acclimation: {FormatTime(secondsRemaining)} remaining";
+    void UpdatePerTankAcclimationTexts()
+    {
+        if (tankAcclimationTexts == null || tankAcclimationTexts.Length == 0) return;
+
+        for (int i = 0; i < tankAcclimationTexts.Length; i++)
+        {
+            TMP_Text text = tankAcclimationTexts[i];
+            if (!text) continue;
+
+            if (TankManager.instance == null || i >= TankManager.instance.SlotCount)
+            {
+                text.gameObject.SetActive(false);
+                continue;
+            }
+
+            var slot = TankManager.instance.GetSlot(i);
+            if (slot == null || !slot.isOwned || slot.fishCount <= 0)
+            {
+                text.gameObject.SetActive(false);
+                continue;
+            }
+
+            float remaining = TankManager.instance.GetAcclimationSecondsRemaining(i);
+            if (remaining <= 0f)
+            {
+                text.gameObject.SetActive(false);
+                continue;
+            }
+
+            text.text = FormatTime(remaining);
+            text.gameObject.SetActive(true);
+        }
     }
 
     string FormatTime(float totalSeconds)
     {
         if (totalSeconds < 0f) totalSeconds = 0f;
-        TimeSpan time = TimeSpan.FromSeconds(totalSeconds);
-        return $"{time.Hours:00}:{time.Minutes:00}:{time.Seconds:00}";
+        int roundedSeconds = Mathf.CeilToInt(totalSeconds);
+        int minutes = roundedSeconds / 60;
+        int seconds = roundedSeconds % 60;
+        return $"{minutes:00}:{seconds:00}";
+    }
+
+    public void MaintainTank(int slotIndex)
+    {
+        if (slotIndex < 0) return;
+        if (TankMaintenanceManager.instance == null) return;
+        TankMaintenanceManager.instance.PayMaintenance(slotIndex);
     }
 }

@@ -5,7 +5,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public int moneyAmount, fishAmount, fishFood, storeRating, daysOpen, totalFishSold;
+    public int moneyAmount, fishAmount, fishFood, daysOpen, totalFishSold;
+    public float storeRating;
     public float timePlayed;
 
     public bool employeeHiredActive;
@@ -75,6 +76,10 @@ public class GameManager : MonoBehaviour
             {
                 daysOpen += additionalDays;
                 if (TankManager.instance != null) TankManager.instance.ResetFedTodayForNewDay();
+                if (TankMaintenanceManager.instance != null)
+                {
+                    for (int i = 0; i < additionalDays; i++) TankMaintenanceManager.instance.OnNewDay();
+                }
             }
         }
 
@@ -85,41 +90,97 @@ public class GameManager : MonoBehaviour
 
     public void NewGame()
     {
-        moneyAmount = 200;
-        fishAmount = 5;
-        fishFood = 5;
-        storeRating = 0;
-        timePlayed = 0f;
-        daysOpen = 1;
+        ApplyGameStateReset(startingMoney: 200, startingFishFood: 5, additionalUnlockedTankCount: 0);
+    }
 
-        fishAcclimationActive = false;
-        fishAcclimationEndTicks = 0;
-
-        totalFishSold = 0;
-        employeeHiredActive = false;
-        employeeContractEndUtcTicks = 0;
-        PlayerPrefs.SetString(decorOwnedKey, "");
-
-        lastRealTimeTicks = DateTime.UtcNow.Ticks;
-        loadedTankSlots = GetDefaultTankSlots();
+    public void SampleGame()
+    {
+        ApplyGameStateReset(startingMoney: 1200, startingFishFood: 5, additionalUnlockedTankCount: 1);
+        SetTankDirtyForTesting(0);
     }
 
     TankSlotData[] GetDefaultTankSlots()
     {
         var arr = new TankSlotData[TankTier.SlotCount];
+        long nowTicks = DateTime.UtcNow.Ticks;
         for (int i = 0; i < arr.Length; i++)
         {
+            bool isStarterTank = i == 0;
+            int starterFishCount = isStarterTank ? 5 : 0;
+            long acclimationEndTicks = 0;
+            if (isStarterTank && starterFishCount > 0)
+            {
+                float acclimationSeconds = TankManager.GetAcclimationDurationSecondsForSlot(i);
+                acclimationEndTicks = nowTicks + (long)TimeSpan.FromSeconds(acclimationSeconds).Ticks;
+            }
             arr[i] = new TankSlotData
             {
-                isOwned = i == 0,
+                isOwned = isStarterTank,
                 lastMaintainedDay = 1,
-                speciesId = i == 0 ? defaultNewGameSpeciesId : null,
-                fishCount = i == 0 ? 5 : 0,
-                acclimationEndTicks = 0,
+                speciesId = isStarterTank ? defaultNewGameSpeciesId : null,
+                fishCount = starterFishCount,
+                acclimationEndTicks = acclimationEndTicks,
                 fedToday = false
             };
         }
         return arr;
+    }
+
+    void ApplyGameStateReset(int startingMoney, int startingFishFood, int additionalUnlockedTankCount)
+    {
+        moneyAmount = Mathf.Max(0, startingMoney);
+        fishAmount = 5;
+        fishFood = Mathf.Max(0, startingFishFood);
+        storeRating = 0f;
+        timePlayed = 0f;
+        daysOpen = 1;
+        fishAcclimationActive = false;
+        fishAcclimationEndTicks = 0;
+        totalFishSold = 0;
+        employeeHiredActive = false;
+        employeeContractEndUtcTicks = 0;
+
+        PlayerPrefs.SetString(decorOwnedKey, "");
+        lastRealTimeTicks = DateTime.UtcNow.Ticks;
+        loadedTankSlots = GetDefaultTankSlots();
+
+        int unlockedExtras = Mathf.Clamp(additionalUnlockedTankCount, 0, TankTier.SlotCount - 1);
+        for (int i = 1; i <= unlockedExtras; i++)
+        {
+            if (loadedTankSlots[i] == null) continue;
+            loadedTankSlots[i].isOwned = true;
+            loadedTankSlots[i].lastMaintainedDay = daysOpen;
+            loadedTankSlots[i].speciesId = null;
+            loadedTankSlots[i].fishCount = 0;
+            loadedTankSlots[i].acclimationEndTicks = 0;
+        }
+
+        // Apply reset immediately when triggered during gameplay.
+        if (FishResourceManager.instance != null) FishResourceManager.instance.SetFishFood(fishFood);
+        if (TankManager.instance != null && loadedTankSlots != null)
+        {
+            TankManager.instance.InitializeSlotsFromSave(loadedTankSlots);
+            fishAmount = TankManager.instance.GetTotalFishCount();
+        }
+
+        SaveGame();
+    }
+
+    void SetTankDirtyForTesting(int slotIndex)
+    {
+        if (slotIndex < 0 || loadedTankSlots == null || slotIndex >= loadedTankSlots.Length) return;
+        TankSlotData slot = loadedTankSlots[slotIndex];
+        if (slot == null || !slot.isOwned) return;
+
+        slot.lastMaintainedDay = daysOpen - 7;
+
+        if (TankManager.instance != null)
+        {
+            TankManager.instance.InitializeSlotsFromSave(loadedTankSlots);
+            fishAmount = TankManager.instance.GetTotalFishCount();
+        }
+
+        SaveGame();
     }
 
     public void SaveGame()
@@ -141,7 +202,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt(moneyKey, moneyAmount);
         PlayerPrefs.SetInt(fishKey, fishAmount);
         PlayerPrefs.SetInt(fishFoodKey, foodToSave);
-        PlayerPrefs.SetInt(ratingKey, storeRating);
+        PlayerPrefs.SetFloat(ratingKey, storeRating);
         PlayerPrefs.SetFloat(timeKey, timePlayed);
         PlayerPrefs.SetInt(daysOpenKey, daysOpen);
         PlayerPrefs.SetString(lastRealKey, lastRealTimeTicks.ToString());
@@ -170,7 +231,7 @@ public class GameManager : MonoBehaviour
         fishAmount = PlayerPrefs.GetInt(fishKey, 0);
         fishFood = PlayerPrefs.GetInt(fishFoodKey, 0);
         if (FishResourceManager.instance != null) FishResourceManager.instance.SetFishFood(fishFood);
-        storeRating = PlayerPrefs.GetInt(ratingKey, 0);
+        storeRating = Mathf.Clamp(PlayerPrefs.GetFloat(ratingKey, 0f), 0f, 5f);
         timePlayed = PlayerPrefs.GetFloat(timeKey, 0f);
         daysOpen = PlayerPrefs.GetInt(daysOpenKey, 0);
         if (daysOpen <= 0) daysOpen = 1;
@@ -250,6 +311,13 @@ public class GameManager : MonoBehaviour
     {
         employeeHiredActive = active;
         employeeContractEndUtcTicks = contractEndUtcTicks;
+        SaveGame();
+    }
+
+    public void AddStoreRating(float delta)
+    {
+        if (Mathf.Approximately(delta, 0f)) return;
+        storeRating = Mathf.Clamp(storeRating + delta, 0f, 5f);
         SaveGame();
     }
 

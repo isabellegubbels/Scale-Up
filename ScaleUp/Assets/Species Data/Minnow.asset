@@ -15,6 +15,6 @@ MonoBehaviour:
   speciesId: 101
   displayName: Minnow
   purchaseCost: 8
-  placeholderSprite: {fileID: 0}
+  placeholderSprite: {fileID: 1140532275212689406, guid: 3e6e02c085fea4b419faaeac68a712f0, type: 3}
   startsUnlocked: 1
-  unlockAfterSales: 0
+  unlockAfterSales: 5

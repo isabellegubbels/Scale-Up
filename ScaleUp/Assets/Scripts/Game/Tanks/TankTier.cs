@@ -15,7 +15,11 @@ public static class TankTier
     public static int GetMaintenanceCost(int slotIndex)
     {
         int cap = GetCapacity(slotIndex);
-        return cap;
+        if (cap == 5) return 5;
+        if (cap == 10) return 10;
+        if (cap == 15) return 15;
+        if (cap == 25) return 25;
+        return 0;
     }
 
     public static int GetPurchaseCost(int slotIndex)

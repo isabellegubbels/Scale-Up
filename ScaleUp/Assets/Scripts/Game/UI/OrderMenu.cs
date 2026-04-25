@@ -40,4 +40,5 @@ public class OrderMenu : MonoBehaviour
         if (foodMenu) foodMenu.SetActive(target == foodMenu);
         if (decorMenu) decorMenu.SetActive(target == decorMenu);
     }
+
 }

@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using TMPro;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Central hub for ordering stock, selling fish, and money. Replaces MoneyManager + FishPurchaseController.
@@ -7,6 +9,11 @@ using UnityEngine;
 public class StoreManager : MonoBehaviour
 {
     public static StoreManager instance;
+    const string reasonNotEnoughMoneyForItem = "not enough money for item";
+    const string reasonNotUnlockedYet = "not unlocked yet";
+    const string reasonTanksAllFull = "all tanks are full";
+    const string reasonNoSuitableTank = "can't fit fish in available tanks";
+    const string reasonAlreadyOwned = "already owned";
 
     [Header("Fish food order")]
     [SerializeField] int fishFoodCost = 10;
@@ -18,7 +25,17 @@ public class StoreManager : MonoBehaviour
 
     [Header("Good Reviews")]
     [SerializeField] int goodReviewsCost = 500;
-    [SerializeField] int goodReviewsRepGain = 100;
+    [SerializeField] float goodReviewsRepGain = 0.1f;
+    [Header("Purchase Feedback")]
+    [SerializeField] GameObject purchasedFeedbackRoot;
+    [SerializeField] TMP_Text purchasedFeedbackText;
+    [SerializeField] GameObject notPurchasedFeedbackRoot;
+    [SerializeField] TMP_Text notPurchasedFeedbackText;
+    [SerializeField] float feedbackVisibleSeconds = 2.5f;
+    [SerializeField] bool dismissFeedbackOnTap = true;
+
+    Coroutine feedbackHideCoroutine;
+    float feedbackShownAtTime = -10f;
 
     void Awake()
     {
@@ -28,6 +45,16 @@ public class StoreManager : MonoBehaviour
             return;
         }
         instance = this;
+    }
+
+    void Update()
+    {
+        if (!dismissFeedbackOnTap) return;
+        if (!IsAnyFeedbackVisible()) return;
+        // Ignore the same tap that created the popup and dismiss on release for more stable mobile behavior.
+        if (Time.unscaledTime - feedbackShownAtTime < 0.1f) return;
+        if (!WasPointerReleasedThisFrame()) return;
+        HideFeedbackImmediately();
     }
 
     public int GetBalance() => GameManager.instance != null ? GameManager.instance.moneyAmount : 0;
@@ -58,72 +85,151 @@ public class StoreManager : MonoBehaviour
     public bool OrderFish(string speciesId, int count)
     {
         if (string.IsNullOrEmpty(speciesId) || count <= 0) return false;
-        if (!IsSpeciesUnlocked(speciesId)) return false;
+        if (!IsSpeciesUnlocked(speciesId))
+        {
+            ShowNotPurchasedFeedback("fish order", reasonNotUnlockedYet);
+            return false;
+        }
         if (TankManager.instance == null || GameManager.instance == null) return false;
 
         var species = FishSpeciesRegistry.instance != null ? FishSpeciesRegistry.instance.GetSpecies(speciesId) : null;
         if (species == null) return false;
+        string itemName = string.IsNullOrEmpty(species.displayName) ? "fish" : species.displayName;
 
         int totalCost = species.purchaseCost * count;
         int targetSlot = TankManager.instance.FindAvailableOwnedTank(speciesId, count);
-        if (targetSlot < 0) return false;
-        if (!CanAfford(totalCost)) return false;
-        if (!SpendMoney(totalCost)) return false;
+        if (targetSlot < 0)
+        {
+            ShowNotPurchasedFeedback(itemName, GetFishTankFailureReason(speciesId, count));
+            return false;
+        }
+        if (!CanAfford(totalCost))
+        {
+            ShowNotPurchasedFeedback(itemName, reasonNotEnoughMoneyForItem);
+            return false;
+        }
+        if (!SpendMoney(totalCost))
+        {
+            ShowNotPurchasedFeedback(itemName, reasonNotEnoughMoneyForItem);
+            return false;
+        }
 
-        return TankManager.instance.AddFishToTank(targetSlot, speciesId, count);
+        bool succeeded = TankManager.instance.AddFishToTank(targetSlot, speciesId, count);
+        if (succeeded) ShowPurchasedFeedback(itemName);
+        else ShowNotPurchasedFeedback(itemName, GetFishTankFailureReason(speciesId, count));
+        return succeeded;
     }
 
     public bool OrderFood()
     {
         if (GameManager.instance == null || FishResourceManager.instance == null) return false;
-        if (!CanAfford(fishFoodCost)) return false;
-        if (!SpendMoney(fishFoodCost)) return false;
+        if (!CanAfford(fishFoodCost))
+        {
+            ShowNotPurchasedFeedback("fish food", reasonNotEnoughMoneyForItem);
+            return false;
+        }
+        if (!SpendMoney(fishFoodCost))
+        {
+            ShowNotPurchasedFeedback("fish food", reasonNotEnoughMoneyForItem);
+            return false;
+        }
         FishResourceManager.instance.AddFishFood(fishFoodPellets);
+        ShowPurchasedFeedback("fish food");
         return true;
     }
 
-    public bool OrderTank(int slotIndex) => TankManager.instance != null && TankManager.instance.PurchaseSlot(slotIndex);
+    public bool OrderTank(int slotIndex)
+    {
+        if (TankManager.instance == null) return false;
+        int capacity = TankTier.GetCapacity(slotIndex);
+        string itemName = capacity > 0 ? $"tank ({capacity})" : "tank";
+        int tankCost = TankManager.instance.GetPurchaseCost(slotIndex);
+
+        if (!CanAfford(tankCost))
+        {
+            ShowNotPurchasedFeedback(itemName, reasonNotEnoughMoneyForItem);
+            return false;
+        }
+
+        bool succeeded = TankManager.instance.PurchaseSlot(slotIndex);
+        if (succeeded) ShowPurchasedFeedback(itemName);
+        else ShowNotPurchasedFeedback(itemName, reasonNoSuitableTank);
+        return succeeded;
+    }
 
     public bool OrderDecor(string decorId)
     {
         if (string.IsNullOrEmpty(decorId) || GameManager.instance == null) return false;
         if (DecorRegistry.instance == null) return false;
-        if (GameManager.instance.IsDecorOwned(decorId)) return false;
+        if (GameManager.instance.IsDecorOwned(decorId))
+        {
+            ShowNotPurchasedFeedback("decor", reasonAlreadyOwned);
+            return false;
+        }
         var data = DecorRegistry.instance != null ? DecorRegistry.instance.GetDecor(decorId) : null;
         if (data == null) return false;
-        if (!CanAfford(data.cost)) return false;
-        if (!SpendMoney(data.cost)) return false;
+        string itemName = string.IsNullOrEmpty(data.displayName) ? "decor" : data.displayName;
+        if (!CanAfford(data.cost))
+        {
+            ShowNotPurchasedFeedback(itemName, reasonNotEnoughMoneyForItem);
+            return false;
+        }
+        if (!SpendMoney(data.cost))
+        {
+            ShowNotPurchasedFeedback(itemName, reasonNotEnoughMoneyForItem);
+            return false;
+        }
         GameManager.instance.AddDecorOwned(decorId);
         if (DecorRegistry.instance != null) DecorRegistry.instance.ApplyOwnedDecor();
+        ShowPurchasedFeedback(itemName);
         return true;
     }
 
     public bool HireEmployee()
     {
         if (GameManager.instance == null) return false;
-        if (!CanAfford(employeeHireCost)) return false;
-        if (!SpendMoney(employeeHireCost)) return false;
+        if (!CanAfford(employeeHireCost))
+        {
+            ShowNotPurchasedFeedback("employee", reasonNotEnoughMoneyForItem);
+            return false;
+        }
+        if (!SpendMoney(employeeHireCost))
+        {
+            ShowNotPurchasedFeedback("employee", reasonNotEnoughMoneyForItem);
+            return false;
+        }
         DateTime baseUtc = DateTime.UtcNow;
         if (IsEmployeeActive() && GameManager.instance.employeeContractEndUtcTicks > baseUtc.Ticks)
             baseUtc = new DateTime(GameManager.instance.employeeContractEndUtcTicks, DateTimeKind.Utc);
         long endTicks = baseUtc.AddDays(employeeContractDays).Ticks;
         GameManager.instance.SetEmployeeHired(true, endTicks);
+        if (TankMaintenanceManager.instance != null) TankMaintenanceManager.instance.TryAutoMaintainDirtyTanks();
+        ShowPurchasedFeedback("employee");
         return true;
     }
 
     public bool BuyGoodReviews()
     {
         if (GameManager.instance == null) return false;
-        if (!CanAfford(goodReviewsCost)) return false;
-        if (!SpendMoney(goodReviewsCost)) return false;
-        GameManager.instance.storeRating += goodReviewsRepGain;
-        GameManager.instance.SaveGame();
+        if (!CanAfford(goodReviewsCost))
+        {
+            ShowNotPurchasedFeedback("good reviews", reasonNotEnoughMoneyForItem);
+            return false;
+        }
+        if (!SpendMoney(goodReviewsCost))
+        {
+            ShowNotPurchasedFeedback("good reviews", reasonNotEnoughMoneyForItem);
+            return false;
+        }
+        GameManager.instance.AddStoreRating(goodReviewsRepGain);
+        ShowPurchasedFeedback("good reviews");
         return true;
     }
 
     public bool FranchiseProperty()
     {
         // to be implemented later on
+        ShowNotPurchasedFeedback("franchise property", "not available");
         return false;
     }
 
@@ -160,5 +266,95 @@ public class StoreManager : MonoBehaviour
             return i;
         }
         return -1;
+    }
+
+    string GetFishTankFailureReason(string speciesId, int count)
+    {
+        if (TankManager.instance == null || count <= 0) return reasonNoSuitableTank;
+        bool hasCompatibleTank = false;
+        for (int i = 0; i < TankManager.instance.SlotCount; i++)
+        {
+            var slot = TankManager.instance.GetSlot(i);
+            if (slot == null || !slot.isOwned) continue;
+            bool speciesCompatible = string.IsNullOrEmpty(slot.speciesId) || slot.speciesId == speciesId;
+            if (!speciesCompatible) continue;
+            hasCompatibleTank = true;
+            int capacity = TankManager.instance.GetCapacity(i);
+            if (slot.fishCount + count <= capacity) return reasonNoSuitableTank;
+        }
+        return hasCompatibleTank ? reasonTanksAllFull : reasonNoSuitableTank;
+    }
+
+    void ShowPurchasedFeedback(string itemName)
+    {
+        string normalizedName = NormalizeItemName(itemName);
+        if (purchasedFeedbackText != null) purchasedFeedbackText.text = $"{normalizedName} purchased!";
+        if (purchasedFeedbackRoot != null)
+        {
+            purchasedFeedbackRoot.SetActive(true);
+            purchasedFeedbackRoot.transform.SetAsLastSibling();
+        }
+        if (notPurchasedFeedbackRoot != null) notPurchasedFeedbackRoot.SetActive(false);
+        feedbackShownAtTime = Time.unscaledTime;
+        StartFeedbackHideCountdown();
+    }
+
+    void ShowNotPurchasedFeedback(string itemName, string reason)
+    {
+        string normalizedName = NormalizeItemName(itemName);
+        string normalizedReason = string.IsNullOrWhiteSpace(reason) ? "not purchased" : reason.Trim();
+        if (notPurchasedFeedbackText != null) notPurchasedFeedbackText.text = $"{normalizedReason} {normalizedName} not purchased";
+        if (notPurchasedFeedbackRoot != null)
+        {
+            notPurchasedFeedbackRoot.SetActive(true);
+            notPurchasedFeedbackRoot.transform.SetAsLastSibling();
+        }
+        if (purchasedFeedbackRoot != null) purchasedFeedbackRoot.SetActive(false);
+        feedbackShownAtTime = Time.unscaledTime;
+        StartFeedbackHideCountdown();
+    }
+
+    void StartFeedbackHideCountdown()
+    {
+        if (feedbackHideCoroutine != null) StopCoroutine(feedbackHideCoroutine);
+        feedbackHideCoroutine = StartCoroutine(HideFeedbackAfterDelay());
+    }
+
+    System.Collections.IEnumerator HideFeedbackAfterDelay()
+    {
+        float duration = Mathf.Max(0.1f, feedbackVisibleSeconds);
+        yield return new WaitForSeconds(duration);
+        HideFeedbackImmediately();
+    }
+
+    void HideFeedbackImmediately()
+    {
+        if (feedbackHideCoroutine != null)
+        {
+            StopCoroutine(feedbackHideCoroutine);
+            feedbackHideCoroutine = null;
+        }
+        if (purchasedFeedbackRoot != null) purchasedFeedbackRoot.SetActive(false);
+        if (notPurchasedFeedbackRoot != null) notPurchasedFeedbackRoot.SetActive(false);
+    }
+
+    bool IsAnyFeedbackVisible()
+    {
+        bool purchasedVisible = purchasedFeedbackRoot != null && purchasedFeedbackRoot.activeInHierarchy;
+        bool notPurchasedVisible = notPurchasedFeedbackRoot != null && notPurchasedFeedbackRoot.activeInHierarchy;
+        return purchasedVisible || notPurchasedVisible;
+    }
+
+    bool WasPointerReleasedThisFrame()
+    {
+        if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasReleasedThisFrame) return true;
+        if (Mouse.current != null && Mouse.current.leftButton.wasReleasedThisFrame) return true;
+        return false;
+    }
+
+    string NormalizeItemName(string itemName)
+    {
+        if (string.IsNullOrWhiteSpace(itemName)) return "item";
+        return itemName.Trim().ToLowerInvariant();
     }
 }

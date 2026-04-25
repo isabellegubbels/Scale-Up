@@ -15,6 +15,6 @@ MonoBehaviour:
   speciesId: 105
   displayName: Weather Loach
   purchaseCost: 40
-  placeholderSprite: {fileID: 0}
+  placeholderSprite: {fileID: -6771488262357138655, guid: cdf02cae84beb41f68feab7686756ee4, type: 3}
   startsUnlocked: 0
-  unlockAfterSales: 70
+  unlockAfterSales: 75

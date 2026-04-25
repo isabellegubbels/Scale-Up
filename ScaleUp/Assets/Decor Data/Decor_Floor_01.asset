@@ -16,5 +16,5 @@ MonoBehaviour:
   displayName: Floor 1
   cost: 35
   icon: {fileID: 0}
-  bonusType: 2
+  bonusType: 1
   bonusValue: 0.05

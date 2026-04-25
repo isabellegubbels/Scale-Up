@@ -15,6 +15,6 @@ MonoBehaviour:
   speciesId: 104
   displayName: Dwarf Fish
   purchaseCost: 25
-  placeholderSprite: {fileID: 0}
+  placeholderSprite: {fileID: 6781485813935997491, guid: 1cbdbe184234643d59a3c97119e5abca, type: 3}
   startsUnlocked: 0
   unlockAfterSales: 40

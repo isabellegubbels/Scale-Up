@@ -120,7 +120,8 @@ public class TankManager : MonoBehaviour
         }
     }
 
-    public const float AcclimationHours = 2f;
+    public const float LargestTankAcclimationSeconds = 60f;
+    public const float SmallerTankStepSeconds = 30f;
 
     public bool CanTankAcceptFish(int slotIndex, string speciesId, int count)
     {
@@ -151,10 +152,24 @@ public class TankManager : MonoBehaviour
         if (slot.fishCount + count > capacity) return false;
         slot.speciesId = speciesId;
         slot.fishCount += count;
-        slot.acclimationEndTicks = System.DateTime.UtcNow.AddHours(AcclimationHours).Ticks;
+        float acclimationSeconds = GetAcclimationDurationSeconds(slotIndex);
+        slot.acclimationEndTicks = System.DateTime.UtcNow.AddSeconds(acclimationSeconds).Ticks; // Any new purchase restarts acclimation for this tank.
         if (GameManager.instance != null) GameManager.instance.SaveGame();
         return true;
     }
+
+    public static float GetAcclimationDurationSecondsForSlot(int slotIndex)
+    {
+        int capacity = TankTier.GetCapacity(slotIndex);
+        int stepsFromLargest = 0;
+        if (capacity >= 25) stepsFromLargest = 0;
+        else if (capacity >= 15) stepsFromLargest = 1;
+        else if (capacity >= 10) stepsFromLargest = 2;
+        else stepsFromLargest = 3;
+        return LargestTankAcclimationSeconds + SmallerTankStepSeconds * stepsFromLargest;
+    }
+
+    public float GetAcclimationDurationSeconds(int slotIndex) => GetAcclimationDurationSecondsForSlot(slotIndex);
 
     public void SetAcclimationEndTicks(int slotIndex, long ticks)
     {
@@ -177,11 +192,41 @@ public class TankManager : MonoBehaviour
         return slot != null && (slot.fishCount == 0 || slot.acclimationEndTicks <= 0 || System.DateTime.UtcNow.Ticks >= slot.acclimationEndTicks);
     }
 
-    /// <summary>When tank maintenance is implemented, tie this to lastMaintainedDay vs daysOpen.</summary>
+    const int maintenanceIntervalDays = 7;
+
     public bool IsTankClean(int slotIndex)
     {
         var slot = GetSlot(slotIndex);
-        return slot != null && slot.isOwned;
+        if (slot == null || !slot.isOwned) return false;
+        if (GameManager.instance == null) return true;
+        int daysSinceMaintenance = GameManager.instance.daysOpen - slot.lastMaintainedDay;
+        return daysSinceMaintenance < maintenanceIntervalDays;
+    }
+
+    public int GetDaysUntilDirty(int slotIndex)
+    {
+        var slot = GetSlot(slotIndex);
+        if (slot == null || !slot.isOwned || GameManager.instance == null) return 0;
+        int daysSinceMaintenance = GameManager.instance.daysOpen - slot.lastMaintainedDay;
+        int remaining = maintenanceIntervalDays - daysSinceMaintenance;
+        return Mathf.Max(0, remaining);
+    }
+
+    public bool MaintainTank(int slotIndex)
+    {
+        var slot = GetSlot(slotIndex);
+        if (slot == null || !slot.isOwned || GameManager.instance == null) return false;
+        slot.lastMaintainedDay = GameManager.instance.daysOpen;
+        GameManager.instance.SaveGame();
+        return true;
+    }
+
+    public bool MaintainTankWithoutSaving(int slotIndex)
+    {
+        var slot = GetSlot(slotIndex);
+        if (slot == null || !slot.isOwned || GameManager.instance == null) return false;
+        slot.lastMaintainedDay = GameManager.instance.daysOpen;
+        return true;
     }
 
     public bool RemoveFishFromTank(int slotIndex, int count)

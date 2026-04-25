@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ae1d4eeb93c4c188189acfdc38faab, type: 3}
   m_Name: Goldfish
   m_EditorClassIdentifier: Assembly-CSharp::FishSpeciesData
-  speciesId: 102
+  speciesId: 103
   displayName: Goldfish
   purchaseCost: 15
-  placeholderSprite: {fileID: 0}
+  placeholderSprite: {fileID: -5428414970614984279, guid: 3f5e82023128042e480d8c761a7a7d94, type: 3}
   startsUnlocked: 0
-  unlockAfterSales: 10
+  unlockAfterSales: 25

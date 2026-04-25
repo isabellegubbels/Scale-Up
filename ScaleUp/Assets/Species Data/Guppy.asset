@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ae1d4eeb93c4c188189acfdc38faab, type: 3}
   m_Name: Guppy
   m_EditorClassIdentifier: Assembly-CSharp::FishSpeciesData
-  speciesId: 103
+  speciesId: 102
   displayName: Guppy
   purchaseCost: 12
-  placeholderSprite: {fileID: 0}
+  placeholderSprite: {fileID: 9057864832780115745, guid: e74aabd2198944edc9432ccb089303fa, type: 3}
   startsUnlocked: 0
-  unlockAfterSales: 20
+  unlockAfterSales: 15
