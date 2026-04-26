@@ -9,6 +9,7 @@ public class CustomerInteractionUI : MonoBehaviour
     [SerializeField] Image portraitImage;
     [SerializeField] Transform fishIconSlot;
     [SerializeField] Image fishIconImage;
+    [SerializeField] TMP_Text customerNameText;
     [SerializeField] TMP_Text dialogueText;
     [SerializeField] TMP_Text offerText;
     [SerializeField] GameObject sellButton;
@@ -19,6 +20,11 @@ public class CustomerInteractionUI : MonoBehaviour
 
     string activeCustomerId;
     Coroutine delayedCloseCoroutine;
+
+    void Awake()
+    {
+        AutoResolveImagesFromSlots();
+    }
 
     void OnEnable()
     {
@@ -157,6 +163,7 @@ public class CustomerInteractionUI : MonoBehaviour
     void ApplyCustomerToPanel(CustomerInstance customer)
     {
         if (customer == null) return;
+        AutoResolveImagesFromSlots();
 
         if (portraitImage != null)
         {
@@ -178,6 +185,9 @@ public class CustomerInteractionUI : MonoBehaviour
             fishIconImage.enabled = fishSprite != null;
             if (fishIconSlot != null) fishIconImage.transform.SetParent(fishIconSlot, false);
         }
+
+        if (customerNameText != null)
+            customerNameText.text = customer.GetDisplayName();
 
         SetDialogue(customer.currentLine);
         HideCounterMessage();
@@ -247,5 +257,28 @@ public class CustomerInteractionUI : MonoBehaviour
     }
 
     bool IsPanelOpen() => panelRoot != null && panelRoot.activeInHierarchy;
+
+    void AutoResolveImagesFromSlots()
+    {
+        if (portraitImage == null && portraitSlot != null)
+            portraitImage = portraitSlot.GetComponentInChildren<Image>(true);
+
+        if (fishIconImage == null && fishIconSlot != null)
+            fishIconImage = fishIconSlot.GetComponentInChildren<Image>(true);
+
+        if (customerNameText == null && panelRoot != null)
+        {
+            var texts = panelRoot.GetComponentsInChildren<TMP_Text>(true);
+            for (int i = 0; i < texts.Length; i++)
+            {
+                var text = texts[i];
+                if (text == null) continue;
+                string objectName = text.gameObject.name.ToLowerInvariant();
+                if (!objectName.Contains("name")) continue;
+                customerNameText = text;
+                break;
+            }
+        }
+    }
 
 }

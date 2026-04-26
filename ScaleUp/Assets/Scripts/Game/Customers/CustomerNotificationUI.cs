@@ -9,9 +9,14 @@ public class CustomerNotificationUI : MonoBehaviour
     [SerializeField] float registerXPosition = 10f;
     [SerializeField] bool showQueueCount = false;
 
+    bool suppressWhileQueueRemains;
+    CanvasGroup localCanvasGroup;
+
     void Awake()
     {
         if (cameraSlider == null) cameraSlider = FindAnyObjectByType<CameraSlider>();
+        localCanvasGroup = GetComponent<CanvasGroup>();
+        if (localCanvasGroup == null) localCanvasGroup = gameObject.AddComponent<CanvasGroup>();
     }
 
     void OnEnable()
@@ -28,7 +33,8 @@ public class CustomerNotificationUI : MonoBehaviour
     public void OnNotificationTapped()
     {
         if (cameraSlider != null) cameraSlider.SlideTo(registerXPosition);
-        if (notificationRoot != null) notificationRoot.SetActive(false);
+        suppressWhileQueueRemains = true;
+        SetNotificationVisible(false);
     }
 
     void SubscribeToCustomerEvents(bool subscribe)
@@ -58,12 +64,27 @@ public class CustomerNotificationUI : MonoBehaviour
     void RefreshNotification()
     {
         int queueCount = CustomerManager.instance != null ? CustomerManager.instance.GetCurrentCustomerCount() : 0;
+        if (queueCount <= 0) suppressWhileQueueRemains = false;
         bool hasCustomers = queueCount > 0;
-        if (notificationRoot != null) notificationRoot.SetActive(hasCustomers);
+        SetNotificationVisible(hasCustomers && !suppressWhileQueueRemains);
         if (customerCountText != null)
         {
             customerCountText.gameObject.SetActive(showQueueCount && hasCustomers);
             customerCountText.text = queueCount.ToString();
         }
+    }
+
+    void SetNotificationVisible(bool isVisible)
+    {
+        GameObject target = notificationRoot != null ? notificationRoot : gameObject;
+        if (target != gameObject)
+        {
+            target.SetActive(isVisible);
+            return;
+        }
+
+        localCanvasGroup.alpha = isVisible ? 1f : 0f;
+        localCanvasGroup.interactable = isVisible;
+        localCanvasGroup.blocksRaycasts = isVisible;
     }
 }

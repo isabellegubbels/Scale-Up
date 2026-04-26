@@ -1,6 +1,4 @@
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class RegisterCustomerListUI : MonoBehaviour
 {
@@ -64,23 +62,22 @@ public class RegisterCustomerListUI : MonoBehaviour
     void CreateButtonForCustomer(CustomerInstance customer)
     {
         var buttonObject = Instantiate(customerButtonPrefab, customerButtonContainer);
-        var button = buttonObject.GetComponent<Button>();
-        var nameText = buttonObject.GetComponentInChildren<TMP_Text>(true);
-        var portraitImage = buttonObject.GetComponentInChildren<Image>(true);
+        var portraitSpriteRenderer = buttonObject.GetComponentInChildren<SpriteRenderer>(true);
         string customerId = customer.customerId;
 
-        if (nameText != null) nameText.text = customer.GetDisplayName();
-        if (portraitImage != null && customer.personality != null && customer.personality.portrait != null)
-            portraitImage.sprite = customer.personality.portrait;
-
-        if (button != null)
+        Sprite portrait = customer.personality != null ? customer.personality.portrait : null;
+        if (portraitSpriteRenderer != null)
         {
-            button.onClick.RemoveAllListeners();
-            button.onClick.AddListener(() => OnCustomerButtonPressed(customerId));
+            portraitSpriteRenderer.sprite = portrait;
+            portraitSpriteRenderer.enabled = portrait != null;
         }
+
+        var worldButton = buttonObject.GetComponent<CustomerWorldButton>();
+        if (worldButton == null) worldButton = buttonObject.AddComponent<CustomerWorldButton>();
+        worldButton.Configure(this, customerId);
     }
 
-    void OnCustomerButtonPressed(string customerId)
+    public void HandleCustomerSelected(string customerId)
     {
         if (string.IsNullOrEmpty(customerId) || CustomerManager.instance == null) return;
         CustomerManager.instance.GreetCustomer(customerId);
