@@ -3,7 +3,9 @@ using UnityEngine.InputSystem;
 
 public class CustomerWorldButton : MonoBehaviour
 {
-    [SerializeField] float maxTapScreenMovement = 20f;
+    [SerializeField] float maxTapScreenMovement = 70f;
+    [SerializeField] bool requireReleaseOverButton = false;
+    [SerializeField] float colliderPaddingMultiplier = 2.2f;
 
     RegisterCustomerListUI owner;
     string customerId;
@@ -14,6 +16,7 @@ public class CustomerWorldButton : MonoBehaviour
     void Awake()
     {
         buttonCollider = GetComponent<Collider2D>();
+        ExpandColliderHitArea();
     }
 
     public void Configure(RegisterCustomerListUI ownerRef, string customerIdValue)
@@ -64,12 +67,14 @@ public class CustomerWorldButton : MonoBehaviour
             return;
         }
 
-        if (!pointerUp || !pressStartedOnButton) return;
+        if (!pointerUp) return;
+        bool releaseOverButton = IsPointerOverButton(pointerPosition);
+        if (!pressStartedOnButton && !releaseOverButton) return;
 
         pressStartedOnButton = false;
         float dragDistance = Vector2.Distance(pressStartScreenPosition, pointerPosition);
         if (dragDistance > maxTapScreenMovement) return;
-        if (!IsPointerOverButton(pointerPosition)) return;
+        if (requireReleaseOverButton && !releaseOverButton) return;
 
         owner.HandleCustomerSelected(customerId);
     }
@@ -80,5 +85,15 @@ public class CustomerWorldButton : MonoBehaviour
         if (cam == null) return false;
         Vector2 worldPoint = cam.ScreenToWorldPoint(screenPosition);
         return buttonCollider.OverlapPoint(worldPoint);
+    }
+
+    void ExpandColliderHitArea()
+    {
+        if (buttonCollider == null) return;
+        if (buttonCollider is BoxCollider2D box)
+        {
+            float multiplier = Mathf.Max(1f, colliderPaddingMultiplier);
+            box.size = new Vector2(box.size.x * multiplier, box.size.y * multiplier);
+        }
     }
 }

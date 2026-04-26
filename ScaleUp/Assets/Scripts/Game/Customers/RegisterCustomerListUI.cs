@@ -5,16 +5,28 @@ public class RegisterCustomerListUI : MonoBehaviour
     [SerializeField] Transform customerButtonContainer;
     [SerializeField] GameObject customerButtonPrefab;
     [SerializeField] CustomerInteractionUI interactionPanel;
+    [SerializeField] float worldButtonVerticalSpacing = -1.2f;
+    [SerializeField] Vector3 firstButtonWorldOffset = Vector3.zero;
+
+    readonly System.Collections.Generic.List<GameObject> spawnedCustomerButtons = new System.Collections.Generic.List<GameObject>();
+    bool isSubscribed;
+
+    void Update()
+    {
+        if (!isSubscribed) TrySubscribeToQueueEvents();
+    }
 
     void OnEnable()
     {
-        SubscribeToQueueEvents(true);
+        TrySubscribeToQueueEvents();
         RefreshList();
     }
 
     void OnDisable()
     {
         SubscribeToQueueEvents(false);
+        isSubscribed = false;
+        ClearButtons();
     }
 
     public void RefreshList()
@@ -31,8 +43,16 @@ public class RegisterCustomerListUI : MonoBehaviour
         {
             var customer = queue[i];
             if (customer == null || !customer.IsActive) continue;
-            CreateButtonForCustomer(customer);
+            CreateButtonForCustomer(customer, spawnedCustomerButtons.Count);
         }
+    }
+
+    void TrySubscribeToQueueEvents()
+    {
+        if (isSubscribed || CustomerManager.instance == null) return;
+        SubscribeToQueueEvents(true);
+        isSubscribed = true;
+        RefreshList();
     }
 
     void SubscribeToQueueEvents(bool subscribe)
@@ -59,9 +79,12 @@ public class RegisterCustomerListUI : MonoBehaviour
 
     void HandleCustomerEvent(CustomerInstance _) => RefreshList();
 
-    void CreateButtonForCustomer(CustomerInstance customer)
+    void CreateButtonForCustomer(CustomerInstance customer, int spawnIndex)
     {
-        var buttonObject = Instantiate(customerButtonPrefab, customerButtonContainer);
+        if (customerButtonContainer == null) return;
+        Vector3 spawnPosition = customerButtonContainer.position + firstButtonWorldOffset + Vector3.up * (worldButtonVerticalSpacing * spawnIndex);
+        var buttonObject = Instantiate(customerButtonPrefab, spawnPosition, Quaternion.identity);
+
         var portraitSpriteRenderer = buttonObject.GetComponentInChildren<SpriteRenderer>(true);
         string customerId = customer.customerId;
 
@@ -75,6 +98,7 @@ public class RegisterCustomerListUI : MonoBehaviour
         var worldButton = buttonObject.GetComponent<CustomerWorldButton>();
         if (worldButton == null) worldButton = buttonObject.AddComponent<CustomerWorldButton>();
         worldButton.Configure(this, customerId);
+        spawnedCustomerButtons.Add(buttonObject);
     }
 
     public void HandleCustomerSelected(string customerId)
@@ -86,11 +110,13 @@ public class RegisterCustomerListUI : MonoBehaviour
 
     void ClearButtons()
     {
-        for (int i = customerButtonContainer.childCount - 1; i >= 0; i--)
+        for (int i = spawnedCustomerButtons.Count - 1; i >= 0; i--)
         {
-            var child = customerButtonContainer.GetChild(i);
-            if (Application.isPlaying) Destroy(child.gameObject);
-            else DestroyImmediate(child.gameObject);
+            var buttonObject = spawnedCustomerButtons[i];
+            if (buttonObject == null) continue;
+            if (Application.isPlaying) Destroy(buttonObject);
+            else DestroyImmediate(buttonObject);
         }
+        spawnedCustomerButtons.Clear();
     }
 }

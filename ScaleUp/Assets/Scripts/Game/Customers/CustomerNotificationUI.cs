@@ -11,6 +11,7 @@ public class CustomerNotificationUI : MonoBehaviour
 
     bool suppressWhileQueueRemains;
     CanvasGroup localCanvasGroup;
+    bool isSubscribed;
 
     void Awake()
     {
@@ -21,13 +22,19 @@ public class CustomerNotificationUI : MonoBehaviour
 
     void OnEnable()
     {
-        SubscribeToCustomerEvents(true);
+        TrySubscribeToCustomerEvents();
         RefreshNotification();
     }
 
     void OnDisable()
     {
         SubscribeToCustomerEvents(false);
+        isSubscribed = false;
+    }
+
+    void Update()
+    {
+        if (!isSubscribed) TrySubscribeToCustomerEvents();
     }
 
     public void OnNotificationTapped()
@@ -57,6 +64,14 @@ public class CustomerNotificationUI : MonoBehaviour
             CustomerManager.instance.OnCustomerDismissed -= HandleCustomerChanged;
             CustomerManager.instance.OnQueueChanged -= RefreshNotification;
         }
+    }
+
+    void TrySubscribeToCustomerEvents()
+    {
+        if (isSubscribed || CustomerManager.instance == null) return;
+        SubscribeToCustomerEvents(true);
+        isSubscribed = true;
+        RefreshNotification();
     }
 
     void HandleCustomerChanged(CustomerInstance _) => RefreshNotification();

@@ -4997,6 +4997,7 @@ MonoBehaviour:
   portraitImage: {fileID: 0}
   fishIconSlot: {fileID: 1843192876}
   fishIconImage: {fileID: 0}
+  customerNameText: {fileID: 1588563719}
   dialogueText: {fileID: 1126279086}
   offerText: {fileID: 1028900764}
   sellButton: {fileID: 437873270}
@@ -37819,10 +37820,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 695e02c0210254ae98dca2692ab2cf5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomerManager
-  minSpawnIntervalSeconds: 30
-  maxSpawnIntervalSeconds: 90
+  minSpawnIntervalSeconds: 10
+  maxSpawnIntervalSeconds: 15
   maxQueueCount: 7
   counterOfferIncreasePercent: 0.15
+  enableSpawnDebugLogs: 0
 --- !u!1 &1195449863
 GameObject:
   m_ObjectHideFlags: 0
@@ -59676,6 +59678,8 @@ MonoBehaviour:
   customerButtonContainer: {fileID: 1858306721}
   customerButtonPrefab: {fileID: 5373891369643622520, guid: 147043bc77cd043fc9776d509fffc7a4, type: 3}
   interactionPanel: {fileID: 144781742}
+  worldButtonVerticalSpacing: -1
+  firstButtonWorldOffset: {x: 0.6, y: 0.27, z: 0}
 --- !u!114 &1858306723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59690,11 +59694,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
   m_Padding:
     m_Left: 0
-    m_Right: 0
+    m_Right: 1
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 1
-  m_Spacing: 3
+  m_ChildAlignment: 0
+  m_Spacing: 1
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1

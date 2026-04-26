@@ -20,6 +20,8 @@ public class CustomerInteractionUI : MonoBehaviour
 
     string activeCustomerId;
     Coroutine delayedCloseCoroutine;
+    bool isSubscribed;
+    bool suppressResolvedAutoClose;
 
     void Awake()
     {
@@ -28,12 +30,18 @@ public class CustomerInteractionUI : MonoBehaviour
 
     void OnEnable()
     {
-        SubscribeToEvents(true);
+        TrySubscribeToEvents();
     }
 
     void OnDisable()
     {
         SubscribeToEvents(false);
+        isSubscribed = false;
+    }
+
+    void LateUpdate()
+    {
+        if (!isSubscribed) TrySubscribeToEvents();
     }
 
     void Update()
@@ -68,6 +76,7 @@ public class CustomerInteractionUI : MonoBehaviour
             StopCoroutine(delayedCloseCoroutine);
             delayedCloseCoroutine = null;
         }
+        suppressResolvedAutoClose = false;
         activeCustomerId = null;
         SetPanelActive(false);
     }
@@ -83,9 +92,11 @@ public class CustomerInteractionUI : MonoBehaviour
     {
         if (CustomerManager.instance == null || string.IsNullOrEmpty(activeCustomerId)) return;
 
+        suppressResolvedAutoClose = true;
         bool acceptedAndSold = CustomerManager.instance.CounterOffer(activeCustomerId);
         if (acceptedAndSold)
         {
+            suppressResolvedAutoClose = false;
             ClosePanel();
             return;
         }
@@ -98,6 +109,7 @@ public class CustomerInteractionUI : MonoBehaviour
             return;
         }
 
+        suppressResolvedAutoClose = false;
         ApplyCustomerToPanel(customerStillActive);
     }
 
@@ -128,6 +140,13 @@ public class CustomerInteractionUI : MonoBehaviour
         }
     }
 
+    void TrySubscribeToEvents()
+    {
+        if (isSubscribed || CustomerManager.instance == null) return;
+        SubscribeToEvents(true);
+        isSubscribed = true;
+    }
+
     void HandleCustomerLeft(CustomerInstance customer)
     {
         if (customer == null || string.IsNullOrEmpty(activeCustomerId)) return;
@@ -139,11 +158,13 @@ public class CustomerInteractionUI : MonoBehaviour
     {
         if (customer == null || string.IsNullOrEmpty(activeCustomerId)) return;
         if (customer.customerId != activeCustomerId) return;
+        if (suppressResolvedAutoClose) return;
         ClosePanel();
     }
 
     void HandleQueueChanged()
     {
+        if (suppressResolvedAutoClose) return;
         if (!IsPanelOpen()) return;
         var customer = GetActiveCustomer();
         if (customer == null || !customer.IsActive)
@@ -240,6 +261,11 @@ public class CustomerInteractionUI : MonoBehaviour
 
     void StartDelayedClose(float delaySeconds)
     {
+        if (!gameObject.activeInHierarchy)
+        {
+            ClosePanel();
+            return;
+        }
         if (delayedCloseCoroutine != null) StopCoroutine(delayedCloseCoroutine);
         delayedCloseCoroutine = StartCoroutine(DelayedClose(delaySeconds));
     }

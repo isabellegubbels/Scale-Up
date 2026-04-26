@@ -25,6 +25,7 @@ public class CustomerManager : MonoBehaviour
 
     [Header("Counter Offers")]
     [SerializeField] float counterOfferIncreasePercent = 0.15f;
+    [SerializeField] bool enableSpawnDebugLogs = true;
 
     readonly List<CustomerInstance> queue = new List<CustomerInstance>();
     float nextSpawnAtTime;
@@ -178,12 +179,17 @@ public class CustomerManager : MonoBehaviour
     {
         if (Time.time < nextSpawnAtTime) return;
         ScheduleNextSpawn();
-        if (queue.Count >= Mathf.Max(1, maxQueueCount)) return;
+        if (queue.Count >= Mathf.Max(1, maxQueueCount))
+        {
+            LogSpawnFailure($"queue is full ({queue.Count}/{Mathf.Max(1, maxQueueCount)})");
+            return;
+        }
 
         var customer = BuildCustomer();
         if (customer == null) return;
 
         queue.Add(customer);
+        LogSpawnSuccess(customer);
         OnCustomerArrived?.Invoke(customer);
         NotifyQueueChanged();
     }
@@ -200,17 +206,43 @@ public class CustomerManager : MonoBehaviour
 
     CustomerInstance BuildCustomer()
     {
-        if (StoreManager.instance == null || FishSpeciesRegistry.instance == null || CustomerPersonalityRegistry.instance == null) return null;
+        if (StoreManager.instance == null)
+        {
+            LogSpawnFailure("StoreManager.instance is null");
+            return null;
+        }
+        if (FishSpeciesRegistry.instance == null)
+        {
+            LogSpawnFailure("FishSpeciesRegistry.instance is null");
+            return null;
+        }
+        if (CustomerPersonalityRegistry.instance == null)
+        {
+            LogSpawnFailure("CustomerPersonalityRegistry.instance is null");
+            return null;
+        }
 
         List<string> unlockedSpeciesIds = StoreManager.instance.GetUnlockedSpeciesIds();
-        if (unlockedSpeciesIds == null || unlockedSpeciesIds.Count == 0) return null;
+        if (unlockedSpeciesIds == null || unlockedSpeciesIds.Count == 0)
+        {
+            LogSpawnFailure("no unlocked fish species available for customer demand");
+            return null;
+        }
 
         var personality = CustomerPersonalityRegistry.instance.GetRandom();
-        if (personality == null) return null;
+        if (personality == null)
+        {
+            LogSpawnFailure("no valid customer personality found in registry");
+            return null;
+        }
 
         string wantedSpeciesId = unlockedSpeciesIds[UnityEngine.Random.Range(0, unlockedSpeciesIds.Count)];
         var speciesData = FishSpeciesRegistry.instance.GetSpecies(wantedSpeciesId);
-        if (speciesData == null) return null;
+        if (speciesData == null)
+        {
+            LogSpawnFailure($"species lookup failed for id '{wantedSpeciesId}'");
+            return null;
+        }
 
         int fishCount = Mathf.Max(1, personality.GetRandomFishCount());
         float offerMultiplier = personality.GetRandomOfferMultiplier();
@@ -236,6 +268,34 @@ public class CustomerManager : MonoBehaviour
             state = CustomerState.Waiting,
             currentLine = PickRandomLine(personality.greetingLines, "Hello!")
         };
+    }
+
+    void LogSpawnSuccess(CustomerInstance customer)
+    {
+        if (!enableSpawnDebugLogs || customer == null) return;
+
+        string personalityName = customer.personality != null
+            ? customer.personality.displayName
+            : "Unknown Personality";
+        string speciesName = customer.wantedSpeciesId;
+        if (FishSpeciesRegistry.instance != null)
+        {
+            var species = FishSpeciesRegistry.instance.GetSpecies(customer.wantedSpeciesId);
+            if (species != null && !string.IsNullOrWhiteSpace(species.displayName))
+                speciesName = species.displayName;
+        }
+
+        Debug.Log(
+            $"[CustomerSpawn] Spawned customer '{customer.customerId}' ({personalityName}) " +
+            $"wanting {customer.wantedFishCount}x {speciesName} for ${customer.offerPrice} " +
+            $"(counter ${customer.counterOfferPrice}, patience {customer.patienceRemaining:0.0}s)"
+        );
+    }
+
+    void LogSpawnFailure(string reason)
+    {
+        if (!enableSpawnDebugLogs) return;
+        Debug.LogWarning($"[CustomerSpawn] Spawn failed: {reason}");
     }
 
     bool CanServeCustomer(CustomerInstance customer)
