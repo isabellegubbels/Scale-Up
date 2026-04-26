@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public int moneyAmount, fishAmount, fishFood, daysOpen, totalFishSold;
+    public int moneyAmount, fishAmount, fishFood, daysOpen, totalFishSold, tipJarAmount;
     public float storeRating;
     public float timePlayed;
 
@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     const string tankSlotKeyPrefix = "GM_Tank_";
     const string decorOwnedKey = "GM_DecorOwned";
     const string totalFishSoldKey = "GM_TotalFishSold";
+    const string tipJarAmountKey = "GM_TipJarAmount";
     const string employeeActiveKey = "GM_EmployeeActive";
     const string employeeEndTicksKey = "GM_EmployeeEndTicks";
 
@@ -137,6 +138,7 @@ public class GameManager : MonoBehaviour
         fishAcclimationActive = false;
         fishAcclimationEndTicks = 0;
         totalFishSold = 0;
+        tipJarAmount = 0;
         employeeHiredActive = false;
         employeeContractEndUtcTicks = 0;
 
@@ -212,6 +214,7 @@ public class GameManager : MonoBehaviour
 
         PlayerPrefs.SetString(decorOwnedKey, GetDecorOwnedCsv());
         PlayerPrefs.SetInt(totalFishSoldKey, totalFishSold);
+        PlayerPrefs.SetInt(tipJarAmountKey, tipJarAmount);
         PlayerPrefs.SetInt(employeeActiveKey, employeeHiredActive ? 1 : 0);
         PlayerPrefs.SetString(employeeEndTicksKey, employeeContractEndUtcTicks.ToString());
 
@@ -247,6 +250,7 @@ public class GameManager : MonoBehaviour
 
         totalFishSold = PlayerPrefs.GetInt(totalFishSoldKey, 0);
         if (totalFishSold < 0) totalFishSold = 0;
+        tipJarAmount = Mathf.Max(0, PlayerPrefs.GetInt(tipJarAmountKey, 0));
         employeeHiredActive = PlayerPrefs.GetInt(employeeActiveKey, 0) == 1;
         string empEnd = PlayerPrefs.GetString(employeeEndTicksKey, "0");
         if (!long.TryParse(empEnd, out employeeContractEndUtcTicks)) employeeContractEndUtcTicks = 0;

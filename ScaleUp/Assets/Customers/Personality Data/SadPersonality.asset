@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 325fa924868034eb0af697abdd94886f, type: 3}
+  m_Name: SadPersonality
+  m_EditorClassIdentifier: Assembly-CSharp::CustomerPersonalityData
+  personalityId: sad
+  displayName: Sad
+  portrait: {fileID: -3752711834126370623, guid: b66c8387a7c3a4af3b637ee06bf9d6c0, type: 3}
+  patienceSeconds: 30
+  minOfferMultiplier: 1
+  maxOfferMultiplier: 2
+  counterOfferAcceptChance: 0.995
+  canTip: 1
+  minTip: 5
+  maxTip: 100
+  greetingLines:
+  - Whats the point
+  satisfiedLines:
+  - This might make me feel better
+  dissatisfiedLines:
+  - Why do I bother
+  counterAcceptedLines:
+  - ugh okay
+  counterRejectedLines:
+  - ugh no
+  goodReviewLines:
+  - I was so sad and coming here made me feel better
+  badReviewLines:
+  - This was supposed to make me feel better, but it did not
+  minFishWanted: 2
+  maxFishWanted: 10

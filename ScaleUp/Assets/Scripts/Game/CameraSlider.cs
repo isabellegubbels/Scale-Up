@@ -5,10 +5,12 @@ public class CameraSlider : MonoBehaviour
 {
     [SerializeField] float minX = -10f, maxX = 10f;
     [SerializeField] float dragSensitivity = 0.02f;
+    [SerializeField] float defaultSlideDuration = 0.4f;
 
     Vector2 startPointerPosition;
     Vector3 startCameraPosition;
     bool dragging;
+    Coroutine slideCoroutine;
 
     void Update()
     {
@@ -49,6 +51,11 @@ public class CameraSlider : MonoBehaviour
 
         if (pointerDown)
         {
+            if (slideCoroutine != null)
+            {
+                StopCoroutine(slideCoroutine);
+                slideCoroutine = null;
+            }
             dragging = true;
             startPointerPosition = pointerPosition;
             startCameraPosition = transform.position;
@@ -64,6 +71,41 @@ public class CameraSlider : MonoBehaviour
         }
 
         if (pointerUp) dragging = false;
+    }
+
+    public void SlideTo(float targetX, float duration = -1f)
+    {
+        float clampedTargetX = Mathf.Clamp(targetX, minX, maxX);
+        float slideDuration = duration >= 0f ? duration : defaultSlideDuration;
+
+        if (slideCoroutine != null) StopCoroutine(slideCoroutine);
+        slideCoroutine = StartCoroutine(SlideRoutine(clampedTargetX, slideDuration));
+    }
+
+    System.Collections.IEnumerator SlideRoutine(float targetX, float duration)
+    {
+        Vector3 startPosition = transform.position;
+        Vector3 endPosition = startPosition;
+        endPosition.x = targetX;
+
+        if (duration <= 0f)
+        {
+            transform.position = endPosition;
+            slideCoroutine = null;
+            yield break;
+        }
+
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            transform.position = Vector3.Lerp(startPosition, endPosition, t);
+            yield return null;
+        }
+
+        transform.position = endPosition;
+        slideCoroutine = null;
     }
 }
 

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 325fa924868034eb0af697abdd94886f, type: 3}
+  m_Name: ImpatientPersonality
+  m_EditorClassIdentifier: Assembly-CSharp::CustomerPersonalityData
+  personalityId: impatient
+  displayName: Impatient
+  portrait: {fileID: -8601138680623356192, guid: 47cc14eff14134c78ba41e6b8cfd5651, type: 3}
+  patienceSeconds: 15
+  minOfferMultiplier: 1
+  maxOfferMultiplier: 1.2
+  counterOfferAcceptChance: 0.25
+  canTip: 1
+  minTip: 50
+  maxTip: 200
+  greetingLines:
+  - Took you long enough
+  satisfiedLines:
+  - Finally
+  dissatisfiedLines:
+  - I really dont have time for this
+  counterAcceptedLines:
+  - I'm okay with that
+  counterRejectedLines:
+  - After making me wait? really
+  goodReviewLines:
+  - This place is great, ill be back!
+  badReviewLines:
+  - This place is terrible!
+  minFishWanted: 1
+  maxFishWanted: 5

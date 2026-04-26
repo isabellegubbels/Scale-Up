@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
@@ -80,6 +81,22 @@ public class StoreManager : MonoBehaviour
         if (species.unlockAfterSales <= 0) return false;
         int sold = GameManager.instance != null ? GameManager.instance.totalFishSold : 0;
         return sold >= species.unlockAfterSales;
+    }
+
+    public List<string> GetUnlockedSpeciesIds()
+    {
+        var unlockedSpeciesIds = new List<string>();
+        if (FishSpeciesRegistry.instance == null) return unlockedSpeciesIds;
+
+        for (int i = 0; i < FishSpeciesRegistry.instance.SpeciesCount; i++)
+        {
+            var species = FishSpeciesRegistry.instance.GetSpeciesAt(i);
+            if (species == null || string.IsNullOrEmpty(species.speciesId)) continue;
+            if (!IsSpeciesUnlocked(species.speciesId)) continue;
+            unlockedSpeciesIds.Add(species.speciesId);
+        }
+
+        return unlockedSpeciesIds;
     }
 
     public bool OrderFish(string speciesId, int count)

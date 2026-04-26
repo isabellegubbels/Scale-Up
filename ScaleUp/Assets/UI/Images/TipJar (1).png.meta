@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 8e1544a6ca1b94705a4129d840be0f48
+guid: 20db33efde7064449aac70b023ccd4cb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4781373940957465942
-    second: exit_0
-  - first:
-      213: 2577959780943527813
-    second: exit_1
+      213: -4973234025261713328
+    second: TipJar (1)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -116,45 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: exit_0
+      name: TipJar (1)_0
       rect:
         serializedVersion: 2
-        x: 25
-        y: 15
-        width: 52
-        height: 66
+        x: 309
+        y: 80
+        width: 405
+        height: 711
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: aa2bbe6cbb525adb0800000000000000
-      internalID: -4781373940957465942
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: exit_1
-      rect:
-        serializedVersion: 2
-        x: 43
-        y: 13
-        width: 34
-        height: 68
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 58ff16c13c0c6c320800000000000000
-      internalID: 2577959780943527813
+      spriteID: 058b36bd0068bfab0800000000000000
+      internalID: -4973234025261713328
       vertices: []
       indices: 
       edges: []
@@ -163,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 8e85bb54805494d549c93c52700c1a26
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -173,8 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      exit_0: -4781373940957465942
-      exit_1: 2577959780943527813
+      TipJar (1)_0: -4973234025261713328
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

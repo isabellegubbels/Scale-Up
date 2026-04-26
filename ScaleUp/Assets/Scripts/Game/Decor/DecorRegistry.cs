@@ -35,6 +35,21 @@ public class DecorRegistry : MonoBehaviour
         return null;
     }
 
+    public float GetTotalOwnedBonus(DecorBonusType bonusType)
+    {
+        if (entries == null || GameManager.instance == null || bonusType == DecorBonusType.None) return 0f;
+
+        float totalBonus = 0f;
+        for (int i = 0; i < entries.Length; i++)
+        {
+            var decor = entries[i].decor;
+            if (decor == null || decor.bonusType != bonusType) continue;
+            if (!GameManager.instance.IsDecorOwned(decor.decorId)) continue;
+            totalBonus += Mathf.Max(0f, decor.bonusValue);
+        }
+        return totalBonus;
+    }
+
     public void ApplyOwnedDecor()
     {
         if (entries == null || GameManager.instance == null) return;
